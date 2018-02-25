@@ -1,0 +1,7 @@
+package zoo;
+
+public abstract class Animal {
+
+    abstract void makeSomeNoise();
+
+}
