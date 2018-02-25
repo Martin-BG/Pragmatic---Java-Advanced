@@ -1,9 +1,9 @@
 package lecture2.inheritance.persons;
 
 @SuppressWarnings("serial")
-public class AgeException extends Exception {
+public class InvalidAgeException extends Exception {
 
-    AgeException(String message) {
+    InvalidAgeException(String message) {
         super(message);
     }
 }

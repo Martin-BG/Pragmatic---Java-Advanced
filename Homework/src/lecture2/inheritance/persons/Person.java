@@ -8,14 +8,14 @@ public class Person {
     private int age;
     private Sex sex;
 
-    public Person(String name, int age, Sex sex) throws AgeException {
+    public Person(String name, int age, Sex sex) throws InvalidAgeException {
         this.name = name;
         this.setAge(age);
         this.sex = sex;
     }
 
     public String getInfo() {
-        return this.getBasePersonInfo() + " person";
+        return this.getBasePersonInfo() + " person.";
     }
 
     String getBasePersonInfo() {
@@ -26,9 +26,9 @@ public class Person {
         return this.age;
     }
 
-    private void setAge(int age) throws AgeException {
+    private void setAge(int age) throws InvalidAgeException {
         if (age < MIN_AGE || age > MAX_AGE) {
-            throw new AgeException("Invalid age " + age);
+            throw new InvalidAgeException(String.valueOf(age));
         }
 
         this.age = age;

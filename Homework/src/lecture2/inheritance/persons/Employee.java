@@ -8,7 +8,7 @@ public class Employee extends Person {
 
     private double daySalary;
 
-    public Employee(String name, int age, Sex sex, double daySalary) throws AgeException {
+    public Employee(String name, int age, Sex sex, double daySalary) throws InvalidAgeException {
         super(name, age, sex);
         this.daySalary = daySalary;
     }

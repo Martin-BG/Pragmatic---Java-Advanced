@@ -7,19 +7,19 @@ import java.util.List;
 
 public class PersonsDemo {
 
-    public static void main(String[] args) throws AgeException {
+    public static void main(String[] args) throws InvalidAgeException {
 
         List<Person> persons = new ArrayList<Person>() {
             {
                 try {
                     add(new Employee("Invalid Age 1", 134, Sex.MALE, 100));
-                } catch (AgeException ae) {
+                } catch (InvalidAgeException ae) {
                     ae.printStackTrace();
                 }
 
                 try {
                     add(new Employee("Invalid Age 2", -3, Sex.MALE, 100));
-                } catch (AgeException ae) {
+                } catch (InvalidAgeException ae) {
                     ae.printStackTrace();
                 }
 
