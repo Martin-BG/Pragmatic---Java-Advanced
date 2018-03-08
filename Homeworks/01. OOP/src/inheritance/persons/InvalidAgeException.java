@@ -1,4 +1,4 @@
-package lecture2.inheritance.persons;
+package inheritance.persons;
 
 @SuppressWarnings("serial")
 public class InvalidAgeException extends Exception {

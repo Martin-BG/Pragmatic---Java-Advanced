@@ -1,6 +1,6 @@
-package lecture2.inheritance;
+package inheritance;
 
-import lecture2.inheritance.persons.*;
+import inheritance.persons.*;
 
 import java.util.ArrayList;
 import java.util.List;

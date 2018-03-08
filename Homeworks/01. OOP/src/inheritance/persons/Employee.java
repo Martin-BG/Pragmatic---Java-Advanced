@@ -1,4 +1,4 @@
-package lecture2.inheritance.persons;
+package inheritance.persons;
 
 public class Employee extends Person {
 
