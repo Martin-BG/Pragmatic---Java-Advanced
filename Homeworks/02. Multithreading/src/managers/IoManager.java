@@ -3,6 +3,7 @@ package managers;
 import constants.Constants;
 import contracts.InputReader;
 import contracts.OutputWriter;
+import exceptions.InvalidCommandException;
 import exceptions.MaxRunningProgramsLimitReachedException;
 import exceptions.ProgramAlreadyStartedException;
 import exceptions.ProgramIsNotRunningException;
@@ -33,8 +34,7 @@ public class IoManager {
                 String[] tokens = input.split(Constants.COMMANDS_SEPARATOR);
 
                 if (tokens.length != Constants.EXPECTED_TOKENS_SIZE) {
-                    this.writer.println(Constants.INVALID_COMMAND);
-                    continue;
+                    throw new InvalidCommandException();
                 }
 
                 String command = tokens[Constants.COMMAND_INDEX].toLowerCase();
@@ -48,8 +48,7 @@ public class IoManager {
                     this.programsManager.stopProgram(program);
                     break;
                 default:
-                    this.writer.println(Constants.INVALID_COMMAND);
-                    break;
+                    throw new InvalidCommandException();
                 }
             } catch (ProgramAlreadyStartedException e) {
                 this.writer.println(program + Constants.PROGRAM_IS_RUNNING_ALREADY);
@@ -57,6 +56,8 @@ public class IoManager {
                 this.writer.println(Constants.CANNOT_START_ANOTHER_PROGRAM);
             } catch (ProgramIsNotRunningException e) {
                 this.writer.println(program + Constants.PROGRAM_IS_NOT_RUNNING);
+            } catch (InvalidCommandException e) {
+                this.writer.println(Constants.INVALID_COMMAND);
             }
         }
 
