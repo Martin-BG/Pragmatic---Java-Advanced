@@ -18,12 +18,11 @@ class Main {
 
     public static void main(String[] args) {
 
-        IoManager ioManager = osLoader();
+        startJavaOS();
 
-        ioManager.start();
     }
 
-    private static IoManager osLoader() {
+    private static void startJavaOS() {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -43,6 +42,8 @@ class Main {
 
         Thread programsCountReporter = new Thread(programsCountRunnable);
 
-        return new IoManager(input, output, programsManager, programsCountReporter);
+        IoManager ioManager = new IoManager(input, output, programsManager, programsCountReporter);
+
+        ioManager.start();
     }
 }
