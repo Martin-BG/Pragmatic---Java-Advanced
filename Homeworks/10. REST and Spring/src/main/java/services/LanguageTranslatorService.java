@@ -8,11 +8,12 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class LanguageTranslatorService {
 
-    private static final String ENCODING = "UTF-8";
+    private static final String ENCODING = StandardCharsets.UTF_8.name();
     private static final String REQUEST_AGENT = "User-Agent";
     private static final String REQUEST_VALUE = "Mozilla/5.0";
     private static final String TRANSLATE_GOOGLEAPIS =
