@@ -36,6 +36,11 @@ public class AppConfig {
         return new WordService(wordChecker, wordWriter, wordReader);
     }
 
+//    @Bean // This works too
+//    public WordService wordService() {
+//        return new WordService(wordChecker(), wordWriter(), wordReader());
+//    }
+
     @Bean
     public WordChecker wordChecker() {
         return new WordChecker();
