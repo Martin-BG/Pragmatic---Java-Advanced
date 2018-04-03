@@ -1,10 +1,10 @@
 package demo;
 
 public class Person {
-    private String name;
-    private int age;
-    private boolean isMale;
-    private String city;
+    private final String name;
+    private final int age;
+    private final boolean isMale;
+    private final String city;
 
     public Person(String name, int age, boolean isMale, String city) {
         this.name = name;
