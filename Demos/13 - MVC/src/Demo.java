@@ -1,4 +1,4 @@
-import controler.StudentController;
+import controller.StudentController;
 import model.Student;
 import view.StudentView;
 
