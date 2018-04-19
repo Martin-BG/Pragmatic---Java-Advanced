@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import javax.sql.DataSource;
 import java.util.List;
 
 @SpringBootApplication(scanBasePackages = {"config"})
@@ -24,7 +23,6 @@ public class App {
     private static void demoEmployee() {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         EmployeeDao employeeDao = context.getBean(EmployeeDao.class);
-        employeeDao.setDataSource(context.getBean(DataSource.class));
 
 //        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 //        EmployeeDao employeeDao = (EmployeeDao) context.getBean("employeeDao");
@@ -62,7 +60,6 @@ public class App {
     private static void demoStudent() {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         StudentDao studentDao = context.getBean(StudentDao.class);
-        studentDao.setDataSource(context.getBean(DataSource.class));
 //        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 //        StudentDao studentDao = (StudentDao) context.getBean("studentDao");
 

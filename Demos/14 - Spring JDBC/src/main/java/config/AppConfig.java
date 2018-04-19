@@ -2,6 +2,7 @@ package config;
 
 import dao.employee.EmployeeDao;
 import dao.student.StudentDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -10,15 +11,20 @@ import javax.sql.DataSource;
 
 @Configuration
 public class AppConfig {
-
     @Bean
-    public EmployeeDao employeeDao() {
-        return new EmployeeDao();
+    @Autowired
+    public EmployeeDao employeeDao(final DataSource dataSource) {
+        final EmployeeDao employeeDao = new EmployeeDao();
+        employeeDao.setDataSource(dataSource);
+        return employeeDao;
     }
 
     @Bean
-    public StudentDao studentDao() {
-        return new StudentDao();
+    @Autowired
+    public StudentDao studentDao(final DataSource dataSource) {
+        final StudentDao studentDao = new StudentDao();
+        studentDao.setDataSource(dataSource);
+        return studentDao;
     }
 
     @Bean
