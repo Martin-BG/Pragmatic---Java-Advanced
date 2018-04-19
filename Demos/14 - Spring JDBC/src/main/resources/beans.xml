@@ -8,15 +8,20 @@
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/test?createDatabaseIfNotExist=true"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/pragmatic?createDatabaseIfNotExist=true"/>
         <property name="username" value="root"/>
         <property name="password" value="root"/>
     </bean>
 
     <!-- Definition for StudentDao bean -->
     <bean id="studentDao"
-          class="dao.StudentDao">
+          class="dao.student.StudentDao">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <!-- Definition for EmployeeDao bean -->
+    <bean id="employeeDao"
+          class="dao.employee.EmployeeDao">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 </beans>
