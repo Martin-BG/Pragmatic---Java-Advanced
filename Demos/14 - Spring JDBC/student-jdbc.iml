@@ -6,6 +6,11 @@
         <fileset id="fileset" name="Spring Application Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/resources/beans.xml</file>
         </fileset>
+        <fileset id="fileset2" name="Spring Application Context 2" removed="false">
+          <dependency>fileset</dependency>
+          <file>file://$MODULE_DIR$/src/main/java/config/AppConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/resources/application.properties</file>
+        </fileset>
       </configuration>
     </facet>
   </component>
@@ -30,5 +35,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.3.13.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.16.20" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.0.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.0.0.RELEASE" level="project" />
   </component>
 </module>

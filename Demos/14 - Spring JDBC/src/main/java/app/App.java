@@ -1,25 +1,33 @@
 package app;
 
+import config.AppConfig;
 import dao.employee.EmployeeDao;
 import dao.student.StudentDao;
 import model.Employee;
 import model.Student;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import javax.sql.DataSource;
 import java.util.List;
 
+@SpringBootApplication(scanBasePackages = {"config"})
 public class App {
+
     public static void main(String[] args) {
-//        demoStudent();
+        demoStudent();
 
         demoEmployee();
     }
 
     private static void demoEmployee() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        EmployeeDao employeeDao = context.getBean(EmployeeDao.class);
+        employeeDao.setDataSource(context.getBean(DataSource.class));
 
-        EmployeeDao employeeDao = (EmployeeDao) context.getBean("employeeDao");
+//        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+//        EmployeeDao employeeDao = (EmployeeDao) context.getBean("employeeDao");
 
         System.out.println("------Records Creation--------");
         employeeDao.create("Zara", 31, "Sales", 1000d);
@@ -52,9 +60,11 @@ public class App {
     }
 
     private static void demoStudent() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-
-        StudentDao studentDao = (StudentDao) context.getBean("studentDao");
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        StudentDao studentDao = context.getBean(StudentDao.class);
+        studentDao.setDataSource(context.getBean(DataSource.class));
+//        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+//        StudentDao studentDao = (StudentDao) context.getBean("studentDao");
 
         System.out.println("------Records Creation--------");
         studentDao.create("Zara", 11, "Here", "Bulgarian", "Unknown");
