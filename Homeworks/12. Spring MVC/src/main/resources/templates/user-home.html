@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title><span th:text="#{html.user.home.page}"/></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<!--/*@thymesVar id="name" type="name"*/-->
+<span th:text="#{html.user.home.head} + ${name}"/><br>
+
+<p><a href="/book-create"><span th:text="#{html.book.create.page}"/></a></p>
+<p><a href="/books"><span th:text="#{html.books.page}"/></a></p>
+<p><a href="/users"><span th:text="#{html.users.page}"/></a></p>
+<p><a href="/user-login"><span th:text="#{html.user.logout}"/></a></p>
+</body>
+</html>

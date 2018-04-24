@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title><span th:text="#{html.library.page}"/></title>
+    <style>
+        legend {
+            font-weight: bold;
+            color: DarkSlateGray;
+        }
+
+        table {
+            width: 100%;
+            background-color: black;
+            color: white;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 0.1em;
+        }
+
+        th {
+            background-color: gray;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #eee;
+            color: black;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #fff;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <fieldset id="books" style="max-width: 160em"></fieldset>
+</div>
+<script th:inline="javascript">
+
+    /*<![CDATA[*/
+
+    const test = /*[[${message}]]*/ null;
+    const user = /*[[${name}]]*/ null;
+    const books = JSON.parse(test);
+    let html = '<legend>Books in Library</legend>'; //TODO - use messages.properties
+    html += '<table><tr><th>ID</th><th>Book</th><th>Author</th><th>Year</th><th>Price</th><th>User</th></tr>';
+
+    for (let row = 0; row < books.length; row++) {
+        html += '<tr>';
+        html += '<td>' + books[row].id + '</td>';
+        html += '<td>' + books[row].name + '</td>';
+        html += '<td>' + books[row].author + '</td>';
+        html += '<td>' + books[row].year + '</td>';
+        html += '<td>' + books[row].price + '</td>';
+
+        if (!books[row].userName) {
+            html += '<td><form id="takeBook" action="/books" method="POST">' +
+                '<input id="bookId" type="hidden" name="bookId" value="' + books[row].id + '">' +
+                '<input type="submit" name="take" value="Take Book" /></form></td>'
+        } else if (books[row].userName.toUpperCase() === user.toUpperCase()) {
+            html += '<td><form id="returnBook" action="/books" method="POST">' +
+                '<input id="bookId" type="hidden" name="bookId" value="' + books[row].id + '">' +
+                '<input type="submit" name="return" value="Return Book" /></form></td>'
+        } else {
+            html += '<td>' + books[row].userName + '</td>';
+        }
+
+        html += '</tr>';
+    }
+    html += '</table>';
+    document.getElementById("books").innerHTML = html;
+
+    /*]]>*/
+</script>
+<br/>
+<p><a href="/user-home"><span th:text="#{html.back.to.home}"/></a></p>
+<p><a href="/user-login"><span th:text="#{html.user.logout}"/></a></p>
+</body>
+</html>

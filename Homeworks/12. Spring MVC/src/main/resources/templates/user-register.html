@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<html>
+<style>
+    label {
+        display: inline-block;
+        text-align: left;
+        width: 2.5em;
+    }
+
+    input {
+        margin-bottom: 10px;
+        display: inline-block;
+        text-align: left;
+        width: 28em;
+        max-width: 28em;
+    }
+</style>
+<head>
+    <title><span th:text="#{html.register}"/></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<form>
+    <fieldset style="max-width: 30em; min-width: 30em">
+        <legend><span th:text="#{html.register.form}"/></legend>
+
+        <label for="user"><span th:text="#{html.user}"/></label>
+
+        <input type="text"
+               id="user"
+               name="user"
+               minlength="4"
+               maxlength="30"
+               autocomplete="off"
+               required><br>
+
+        <label for="email"><span th:text="#{html.email}"/></label>
+        <input type="text"
+               id="email"
+               name="email"
+               minlength="5"
+               maxlength="30"
+               pattern="^(?=\w)(?:\w+\.?)*\w+(?<=\w)@(?:\w+\.)+\w+$"
+               autocomplete="off"
+               required><br>
+
+        <label for="age"><span th:text="#{html.age}"/></label>
+        <input type="number"
+               id="age"
+               name="age"
+               min="0"><br><br>
+
+        <button type="submit"><span th:text="#{html.register}"/></button>
+        <br>
+
+        <p th:text="${message}"/>
+    </fieldset>
+</form>
+<p><a href="/user-login"><span th:text="#{html.back}"/></a></p>
+</body>
+</html>

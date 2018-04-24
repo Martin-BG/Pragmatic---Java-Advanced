@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<html>
+<style>
+    label {
+        display: inline-block;
+        text-align: left;
+        width: 2.5em;
+    }
+
+    input {
+        display: inline-block;
+        text-align: left;
+        width: 28em;
+        max-width: 28em;
+    }
+</style>
+<head>
+    <title><span th:text="#{html.login}"/></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<form>
+    <fieldset style="max-width: 30em; min-width: 30em">
+        <legend>Login</legend>
+
+        <label for="user"><span th:text="#{html.user}"/></label>
+
+        <input type="text"
+               id="user"
+               name="user"
+               minlength="4"
+               maxlength="30"
+               autofocus>
+
+        <button type="submit"><span th:text="#{html.login}"/></button>
+
+        <p th:text="${message}"/>
+    </fieldset>
+</form>
+<p><a href="/user-register"><span th:text="#{html.user.register.page}"/></a></p>
+</body>
+</html>
