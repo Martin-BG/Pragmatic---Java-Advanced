@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ModelParser mapper;
@@ -57,13 +57,11 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-    @Override
-    public User findOneByName(final String name) {
+    User findOneByName(final String name) {
         return this.userRepository.findOneByName(name);
     }
 
-    @Override
-    public User findOneByEmail(final String email) {
+    User findOneByEmail(final String email) {
         return this.userRepository.findOneByEmail(email);
     }
 

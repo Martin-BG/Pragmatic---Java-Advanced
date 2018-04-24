@@ -9,7 +9,6 @@ import library.model.entity.User;
 import library.parser.api.ModelParser;
 import library.persistance.repository.BookRepository;
 import library.persistance.service.api.BookService;
-import library.persistance.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,16 +18,16 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class BookServiceImpl implements BookService {
+class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
-    private final UserService userService;
+    private final UserServiceImpl userService;
     private final ModelParser mapper;
     private final Messages messages;
 
     @Autowired
     public BookServiceImpl(final BookRepository bookRepository,
-                           final UserService userService,
+                           final UserServiceImpl userService,
                            final ModelParser mapper,
                            final Messages messages) {
         this.bookRepository = bookRepository;
