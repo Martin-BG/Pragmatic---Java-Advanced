@@ -74,14 +74,15 @@ CREATE TABLE `cars` (
   `price`         DECIMAL(19, 2)                                    NOT NULL,
   `max_mileage`   INT                                               NOT NULL,
   `condition`     ENUM ('NEW', 'USED', 'PARTS')                     NOT NULL,
-  `engine_type`   ENUM ('GASOLINE', 'DIESEL', 'ELECTRIC', 'HYBRID') NOT NULL,
-  `gearbox`       ENUM ('AUTOMATIC', 'MANUAL', 'SEMI_AUTOMATIC')    NOT NULL,
-  `brand_id`      INT                                               NOT NULL,
-  `model_id`      INT                                               NOT NULL,
-  `category_id`   INT                                               NOT NULL,
-  `color_id`      INT                                               NOT NULL,
-  `city_id`       INT                                               NOT NULL,
-  INDEX (`price`),
+  `engine_type` ENUM ('GASOLINE', 'DIESEL', 'ELECTRIC', 'HYBRID') NOT NULL,
+  `gearbox`     ENUM ('AUTOMATIC', 'MANUAL', 'SEMI_AUTOMATIC')    NOT NULL,
+  `brand_id`    INT                                               NOT NULL,
+  `model_id`    INT                                               NOT NULL,
+  `category_id` INT                                               NOT NULL,
+  `color_id`    INT                                               NOT NULL,
+  `city_id`     INT                                               NOT NULL,
+  `user_id`     INT                                               NOT NULL,
+  INDEX (`price`, `user_id`),
   CONSTRAINT `fk_cars_brands` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`)
     ON DELETE CASCADE,
   CONSTRAINT `fk_cars_models` FOREIGN KEY (`model_id`) REFERENCES `models` (`id`)
@@ -91,19 +92,11 @@ CREATE TABLE `cars` (
   CONSTRAINT `fk_cars_colors` FOREIGN KEY (`color_id`) REFERENCES `colors` (`id`)
     ON DELETE CASCADE,
   CONSTRAINT `fk_cars_cities` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`)
+    ON DELETE CASCADE,
+  CONSTRAINT `fk_cars_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
     ON DELETE CASCADE
 );
 
 ALTER TABLE `cars_extras`
   ADD CONSTRAINT `fk_cars_extras_cars` FOREIGN KEY (`car_id`) REFERENCES `cars` (`id`)
   ON DELETE CASCADE;
-
-CREATE TABLE `users_cars` (
-  `user_id` INT NOT NULL,
-  `car_id`  INT NOT NULL,
-  CONSTRAINT `pk_users_cars` PRIMARY KEY (`user_id`, `car_id`),
-  CONSTRAINT `fk_users_cars_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-    ON DELETE CASCADE,
-  CONSTRAINT `fk_users_cars_cars` FOREIGN KEY (`car_id`) REFERENCES `users` (`id`)
-    ON DELETE CASCADE
-);
