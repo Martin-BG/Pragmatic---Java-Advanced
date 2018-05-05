@@ -68,12 +68,12 @@ CREATE TABLE `cars_extras` (
 );
 
 CREATE TABLE `cars` (
-  `id`            INT PRIMARY KEY AUTO_INCREMENT,
-  `year`          INT                                               NOT NULL,
-  `horse_power`   INT                                               NOT NULL,
-  `price`         DECIMAL(19, 2)                                    NOT NULL,
-  `max_mileage`   INT                                               NOT NULL,
-  `condition`     ENUM ('NEW', 'USED', 'PARTS')                     NOT NULL,
+  `id`          INT PRIMARY KEY AUTO_INCREMENT,
+  `year`        INT                                               NOT NULL,
+  `horse_power` INT                                               NOT NULL,
+  `price`       DECIMAL(19, 2)                                    NOT NULL,
+  `max_mileage` INT                                               NOT NULL,
+  `condition`   ENUM ('NEW', 'USED', 'PARTS')                     NOT NULL,
   `engine_type` ENUM ('GASOLINE', 'DIESEL', 'ELECTRIC', 'HYBRID') NOT NULL,
   `gearbox`     ENUM ('AUTOMATIC', 'MANUAL', 'SEMI_AUTOMATIC')    NOT NULL,
   `brand_id`    INT                                               NOT NULL,
