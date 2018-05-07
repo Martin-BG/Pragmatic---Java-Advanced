@@ -7,8 +7,7 @@ USE `mobilebg`;
 CREATE TABLE `users` (
   `id`       INT PRIMARY KEY AUTO_INCREMENT,
   `email`    VARCHAR(50) UNIQUE NOT NULL,
-  `password` VARCHAR(30)        NOT NULL,
-  INDEX (`email`(30))
+  `password` VARCHAR(30)        NOT NULL
 );
 
 CREATE TABLE `colors` (
@@ -82,7 +81,7 @@ CREATE TABLE `cars` (
   `color_id`    INT                                               NOT NULL,
   `city_id`     INT                                               NOT NULL,
   `user_id`     INT                                               NOT NULL,
-  INDEX (`price`, `user_id`),
+  INDEX (`price`),
   CONSTRAINT `fk_cars_brands` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`)
     ON DELETE CASCADE,
   CONSTRAINT `fk_cars_models` FOREIGN KEY (`model_id`) REFERENCES `models` (`id`)
