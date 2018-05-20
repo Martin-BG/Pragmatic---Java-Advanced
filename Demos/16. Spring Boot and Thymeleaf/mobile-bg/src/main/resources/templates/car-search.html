@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Car Search</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+
+<h1>Cars</h1>
+
+<table border="1">
+    <tr>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Condition</th>
+        <th>Year</th>
+        <th>Horse Power</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>City</th>
+        <th>Max Mileage</th>
+        <th>Engine Type</th>
+        <th>Color</th>
+        <th>Gearbox</th>
+        <th>Car Extras</th>
+    </tr>
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.brand}"></td>
+        <td th:text="${car.model}"></td>
+        <td th:text="${car.condition}"></td>
+        <td th:text="${car.year}"></td>
+        <td th:text="${car.horsePower}"></td>
+        <td th:text="${car.price}"></td>
+        <td th:text="${car.category}"></td>
+        <td th:text="${car.city}"></td>
+        <td th:text="${car.maxMileage}"></td>
+        <td th:text="${car.engineType}"></td>
+        <td th:text="${car.color}"></td>
+        <td th:text="${car.gearbox}"></td>
+        <td th:text="${car.carExtras}"></td>
+    </tr>
+</table>
+
+<p>
+    <a href="/user-home"><span th:text="#{user.back}"/></a>
+</p>
+
+</body>
+
+</html>

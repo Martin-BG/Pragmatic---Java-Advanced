@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>mobile.bg</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<style>
+    label {
+        display: inline-block;
+        text-align: left;
+        width: 6em;
+    }
+
+    input {
+        display: inline-block;
+        text-align: left;
+        width: 28em;
+        max-width: 28em;
+    }
+</style>
+<body>
+<form action="#" th:action="@{/car-search}" th:object="${car}" method="POST">
+    <fieldset style="max-width: 30em; min-width: 30em">
+
+        <span th:text="#{user.logged} + ${email}"/><br><br>
+
+        <label for="model">Model</label>
+        <input type="text" id="model" th:field="*{model}"/><br>
+
+        <label for="brand">Brand</label>
+        <input type="text" id="brand" th:field="*{brand}"><br>
+
+        <label for="condition">Condition</label>
+        <select id="condition" th:field="*{condition}">
+            <option selected value=""> -- select an option --</option>
+            <option value="NEW">NEW</option>
+            <option value="USED">USED</option>
+            <option value="PARTS">PARTS</option>
+        </select><br>
+
+        <label for="year">Year</label>
+        <input type="number" id="year" min="1950" th:field="*{year}"><br>
+
+        <label for="horsePower">Horse Power</label>
+        <input type="number" id="horsePower" min="0" th:field="*{horsePower}"><br>
+
+        <label for="price">Price</label>
+        <input type="number" step="0.01" min="0" id="price" th:field="*{price}"><br>
+
+        <label for="category">Category</label>
+        <input type="text" id="category" th:field="*{category}"><br>
+
+        <label for="city">City</label>
+        <input type="text" id="city" th:field="*{city}"><br>
+
+        <label for="maxMileage">Max Mileage</label>
+        <input type="number" min="0" id="maxMileage" th:field="*{maxMileage}"><br>
+
+        <label for="engineType">Engine Type</label>
+        <select id="engineType" th:field="*{engineType}">
+            <option selected value=""> -- select an option --</option>
+            <option value="DIESEL">DIESEL</option>
+            <option value="GASOLINE">GASOLINE</option>
+            <option value="HYBRID">HYBRID</option>
+            <option value="ELECTRIC">ELECTRIC</option>
+        </select><br>
+
+        <label for="color">Color</label>
+        <input type="text" id="color" th:field="*{color}"><br>
+
+        <label for="gearbox">Gearbox</label>
+        <select id="gearbox" th:field="*{gearbox}">
+            <option selected value=""> -- select an option --</option>
+            <option value="MANUAL">MANUAL</option>
+            <option value="AUTOMATIC">AUTOMATIC</option>
+        </select><br>
+
+        <label for="carExtras">Car Extras</label>
+        <input type="text" id="carExtras" pattern=^[a-zA-Z,]+$ th:field="*{carExtras}"><br><br>
+
+        <button type="submit" name="action" value="search">Search</button>
+        <br><br>
+        <button type="submit" name="action" value="add">Add New Car</button>
+        <br><br>
+
+        <button type="submit" name="action" value="showMyCars">Show My Cars</button>
+        <br><br>
+
+
+        <p th:text="${message}"/>
+
+    </fieldset>
+</form>
+
+<p><a href="/user-login">Logout</a></p>
+
+</body>
+</html>
