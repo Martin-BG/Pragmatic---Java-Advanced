@@ -15,16 +15,16 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public boolean add(User user) {
+    public boolean add(final User user) {
         return this.userDao.add(user);
     }
 
-    public long getIdByEmail(String email) {
+    public long getIdByEmail(final String email) {
         return this.userDao.getIdByEmail(email);
     }
 
-    public boolean areCredentialsValid(String email, String password) {
-        User user = this.userDao.getUser(email);
+    public boolean areCredentialsValid(final String email, final String password) {
+        final User user = this.userDao.getUser(email);
         return user != null && user.getPassword().equals(password);
     }
 }

@@ -28,7 +28,8 @@ public class RatingService {
     }
 
     public List<Rating> getAllByUserId(final long userId) {
-        final List<Rating> ratings = ratingDao.getAllByUserId(userId);
+        final List<Rating> ratings = this.ratingDao.getAllByUserId(userId);
+
         final Iterator<Rating> iterator = ratings.iterator();
         while (iterator.hasNext()) {
             final Rating rating = iterator.next();
@@ -43,6 +44,6 @@ public class RatingService {
     }
 
     public List<Rating> getAllByMovieId(final long movieId) {
-        return ratingDao.getAllByMovieId(movieId);
+        return this.ratingDao.getAllByMovieId(movieId);
     }
 }
