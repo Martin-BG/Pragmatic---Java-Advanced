@@ -12,13 +12,13 @@ import javax.sql.DataSource;
 public class UserDao extends NamedParameterJdbcTemplate {
 
     @Autowired
-    public UserDao(DataSource sqlDataSource) {
+    public UserDao(final DataSource sqlDataSource) {
         super(sqlDataSource);
     }
 
-    public boolean add(User user) {
-        String sql = "INSERT INTO `users` (`email`, `password`) VALUES (?, ?)";
-        int success = getJdbcOperations().update(sql, user.getEmail(), user.getPassword());
+    public boolean add(final User user) {
+        final String sql = "INSERT INTO `users` (`email`, `password`) VALUES (?, ?)";
+        final int success = getJdbcOperations().update(sql, user.getEmail(), user.getPassword());
         return success == 1;
     }
 
