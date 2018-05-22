@@ -1,6 +1,5 @@
 package imdb.movie.dao;
 
-import imdb.movie.model.Movie;
 import imdb.movie.model.Poster;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -13,13 +12,13 @@ import java.util.List;
 public class PosterDao extends NamedParameterJdbcTemplate {
 
     @Autowired
-    public PosterDao(DataSource sqlDataSource) {
+    public PosterDao(final DataSource sqlDataSource) {
         super(sqlDataSource);
     }
 
-    public boolean add(Poster poster, Movie movie) {
+    public boolean add(final Poster poster, final long movieId) {
         String sql = "INSERT INTO `posters` (`movie_id`, `url`) VALUES (?, ?)";
-        int success = getJdbcOperations().update(sql, movie.getId(), poster.getUrl());
+        int success = getJdbcOperations().update(sql, movieId, poster.getUrl());
         return success == 1;
     }
 
