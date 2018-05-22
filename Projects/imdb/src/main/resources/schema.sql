@@ -6,14 +6,14 @@ USE `imdb`;
 
 CREATE TABLE `movies` (
   `id`    INT PRIMARY KEY AUTO_INCREMENT,
-  `title` VARCHAR(50)     NOT NULL,
+  `title` VARCHAR(50)     NOT NULL UNIQUE,
   `year`  INT(4) UNSIGNED NOT NULL
 );
 
 CREATE TABLE `trailers` (
   `id`       INT PRIMARY KEY AUTO_INCREMENT,
   `movie_id` INT          NOT NULL,
-  `url`      VARCHAR(255) NOT NULL,
+  `url`      VARCHAR(255) NOT NULL UNIQUE,
   CONSTRAINT `fk_trailers_movies` FOREIGN KEY (`movie_id`)
   REFERENCES `movies` (`id`)
     ON DELETE CASCADE
@@ -22,7 +22,7 @@ CREATE TABLE `trailers` (
 CREATE TABLE `posters` (
   `id`       INT PRIMARY KEY AUTO_INCREMENT,
   `movie_id` INT          NOT NULL,
-  `url`      VARCHAR(255) NOT NULL,
+  `url`      VARCHAR(255) NOT NULL UNIQUE,
   CONSTRAINT `fk_posters_movies` FOREIGN KEY (`movie_id`)
   REFERENCES `movies` (`id`)
     ON DELETE CASCADE
@@ -30,13 +30,13 @@ CREATE TABLE `posters` (
 
 CREATE TABLE `actors` (
   `id`   INT PRIMARY KEY AUTO_INCREMENT,
-  `name` VARCHAR(50) NOT NULL,
+  `name` VARCHAR(50) NOT NULL UNIQUE,
   INDEX (`name`)
 );
 
 CREATE TABLE `genres` (
   `id`   INT PRIMARY KEY AUTO_INCREMENT,
-  `name` VARCHAR(50),
+  `name` VARCHAR(50) UNIQUE,
   INDEX (`name`)
 );
 
