@@ -5,14 +5,27 @@ CREATE DATABASE `imdb`;
 USE `imdb`;
 
 CREATE TABLE `movies` (
-  `id`      INT PRIMARY KEY AUTO_INCREMENT,
-  `title`   VARCHAR(50) NOT NULL,
-  `year`    YEAR        NOT NULL,
-  `rating`  DECIMAL,
-  `poster`  VARCHAR(255),
-  `trailer` VARCHAR(255),
-  INDEX (`title`),
-  INDEX (`rating`)
+  `id`    INT PRIMARY KEY AUTO_INCREMENT,
+  `title` VARCHAR(50)     NOT NULL,
+  `year`  INT(4) UNSIGNED NOT NULL
+);
+
+CREATE TABLE `trailers` (
+  `id`       INT PRIMARY KEY AUTO_INCREMENT,
+  `movie_id` INT          NOT NULL,
+  `url`      VARCHAR(255) NOT NULL,
+  CONSTRAINT `fk_trailers_movies` FOREIGN KEY (`movie_id`)
+  REFERENCES `movies` (`id`)
+    ON DELETE CASCADE
+);
+
+CREATE TABLE `posters` (
+  `id`       INT PRIMARY KEY AUTO_INCREMENT,
+  `movie_id` INT          NOT NULL,
+  `url`      VARCHAR(255) NOT NULL,
+  CONSTRAINT `fk_posters_movies` FOREIGN KEY (`movie_id`)
+  REFERENCES `movies` (`id`)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE `actors` (
@@ -55,6 +68,16 @@ CREATE TABLE `users` (
   `id`       INT PRIMARY KEY AUTO_INCREMENT,
   `email`    VARCHAR(50) NOT NULL UNIQUE,
   `password` VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE `movies_rating` (
+  `movie_id` INT NOT NULL UNIQUE,
+  `votes`    INT NOT NULL DEFAULT 0,
+  `rating`   DECIMAL(10, 8),
+  CONSTRAINT `fk_movies_rating_movies` FOREIGN KEY (`movie_id`)
+  REFERENCES `movies` (`id`)
+    ON DELETE CASCADE,
+  CONSTRAINT `pk_users_movies` PRIMARY KEY (`movie_id`)
 );
 
 CREATE TABLE `movies_user_ratings` (
