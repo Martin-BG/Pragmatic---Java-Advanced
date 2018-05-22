@@ -9,7 +9,7 @@ import java.util.Set;
 @Data
 public class Movie {
 
-    private int id;
+    private long id;
     private String title;
     private int year;
     private int votes;
