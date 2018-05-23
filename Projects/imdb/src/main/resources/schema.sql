@@ -70,16 +70,6 @@ CREATE TABLE `users` (
   `password` VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE `movies_rating` (
-  `movie_id` INT NOT NULL UNIQUE,
-  `votes`    INT NOT NULL DEFAULT 0,
-  `rating`   DECIMAL(10, 8),
-  CONSTRAINT `fk_movies_rating_movies` FOREIGN KEY (`movie_id`)
-  REFERENCES `movies` (`id`)
-    ON DELETE CASCADE,
-  CONSTRAINT `pk_users_movies` PRIMARY KEY (`movie_id`)
-);
-
 CREATE TABLE `movies_user_ratings` (
   `movie_id` INT     NOT NULL,
   `user_id`  INT     NOT NULL,
