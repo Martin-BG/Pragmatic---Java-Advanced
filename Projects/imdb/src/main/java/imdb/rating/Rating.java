@@ -1,4 +1,4 @@
-package imdb.user.model;
+package imdb.rating;
 
 import imdb.movie.model.Movie;
 import lombok.Data;
