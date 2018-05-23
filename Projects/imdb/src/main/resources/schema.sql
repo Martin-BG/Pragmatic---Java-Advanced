@@ -30,14 +30,12 @@ CREATE TABLE `posters` (
 
 CREATE TABLE `actors` (
   `id`   INT PRIMARY KEY AUTO_INCREMENT,
-  `name` VARCHAR(50) NOT NULL UNIQUE,
-  INDEX (`name`)
+  `name` VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE `genres` (
   `id`   INT PRIMARY KEY AUTO_INCREMENT,
-  `name` VARCHAR(50) UNIQUE,
-  INDEX (`name`)
+  `name` VARCHAR(50) UNIQUE
 );
 
 CREATE TABLE `movies_genres` (
