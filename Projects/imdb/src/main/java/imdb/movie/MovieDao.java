@@ -1,42 +1,42 @@
-package imdb.movie.dao;
+package imdb.movie;
 
-import imdb.movie.model.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Repository
-public class MovieDao extends NamedParameterJdbcTemplate {
+class MovieDao extends NamedParameterJdbcTemplate {
 
     @Autowired
-    public MovieDao(final DataSource sqlDataSource) {
+    MovieDao(final DataSource sqlDataSource) {
         super(sqlDataSource);
     }
 
-    public boolean add(final Movie movie) {
+    boolean add(final Movie movie) {
         String sql = "INSERT INTO `movies` (`title`, `year`) VALUES (?, ?)";
-        int success = getJdbcOperations().update(sql, movie.getTitle(), movie.getYear());
-        return success == 1;
-    }
-
-    public Movie findById(final long movieId) {
-        final String sql = "SELECT * FROM `movies` WHERE `id` = ?";
         try {
-            return getJdbcOperations().queryForObject(sql, new Object[]{movieId}, new MovieRowMapper());
-        } catch (EmptyResultDataAccessException e) {
-            return null;
+            return 1 == getJdbcOperations().update(sql, movie.getTitle(), movie.getYear());
+        } catch (DataAccessException e) {
+            return false;
         }
     }
 
-    public Movie findByTitle(final String title) {
+    Movie findByTitle(final String title) {
         final String sql = "SELECT * FROM `movies` WHERE `title` = ?";
         try {
             return getJdbcOperations().queryForObject(sql, new Object[]{title}, new MovieRowMapper());
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
+    }
+
+    List<String> getAllTitles() {
+        final String sql = "SELECT m.title FROM `movies` AS m";
+        return getJdbcOperations().queryForList(sql, String.class);
     }
 }
