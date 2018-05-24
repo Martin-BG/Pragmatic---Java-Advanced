@@ -1,0 +1,18 @@
+label {
+    display: inline-block;
+    text-align: left;
+    width: 4.2em;
+}
+
+input {
+    display: inline-block;
+    text-align: left;
+    width: 28em;
+    max-width: 28em;
+    margin: 8px;
+}
+
+fieldset {
+    max-width: 30em;
+    min-width: 30em
+}
