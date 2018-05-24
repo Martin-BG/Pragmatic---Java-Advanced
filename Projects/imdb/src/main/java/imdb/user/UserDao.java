@@ -1,6 +1,5 @@
-package imdb.user.dao;
+package imdb.user;
 
-import imdb.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -9,31 +8,24 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 
 @Repository
-public class UserDao extends NamedParameterJdbcTemplate {
+class UserDao extends NamedParameterJdbcTemplate {
 
     @Autowired
     public UserDao(final DataSource sqlDataSource) {
         super(sqlDataSource);
     }
 
-    public boolean add(final User user) {
+    boolean add(final String email, final String password) {
         final String sql = "INSERT INTO `users` (`email`, `password`) VALUES (?, ?)";
-        final int success = getJdbcOperations().update(sql, user.getEmail(), user.getPassword());
-        return success == 1;
+        return 1 == getJdbcOperations().update(sql, email, password);
     }
 
-
-    public User getUser(final String email) {
+    User get(final String email) {
         final String sql = "SELECT * FROM `users` WHERE `email` = ?";
         try {
             return getJdbcOperations().queryForObject(sql, new Object[]{email}, new UserRowMapper());
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
-    }
-
-    public long getIdByEmail(String email) {
-        final String sql = "SELECT `id` FROM `users` WHERE `email` = ?";
-        return getJdbcOperations().queryForObject(sql, new Object[]{email}, Long.class);
     }
 }
