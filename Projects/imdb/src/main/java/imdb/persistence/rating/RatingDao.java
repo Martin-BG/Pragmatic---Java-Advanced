@@ -1,4 +1,4 @@
-package imdb.rating;
+package imdb.persistence.rating;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;

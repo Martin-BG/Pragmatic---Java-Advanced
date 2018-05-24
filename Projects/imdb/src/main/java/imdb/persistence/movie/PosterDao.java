@@ -1,4 +1,4 @@
-package imdb.movie;
+package imdb.persistence.movie;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -10,15 +10,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Repository
-class TrailerDao extends NamedParameterJdbcTemplate {
+class PosterDao extends NamedParameterJdbcTemplate {
 
     @Autowired
-    TrailerDao(final DataSource sqlDataSource) {
+    PosterDao(final DataSource sqlDataSource) {
         super(sqlDataSource);
     }
 
     boolean add(final String title, final String url) {
-        String sql = "INSERT INTO `trailers` (`movie_id`, `url`) VALUES (" +
+        String sql = "INSERT INTO `posters` (`movie_id`, `url`) VALUES (" +
                 "(SELECT m.id FROM `movies` AS m WHERE m.title = ?), ?)";
         try {
             return 1 == getJdbcOperations().update(sql, title, url);
@@ -27,9 +27,9 @@ class TrailerDao extends NamedParameterJdbcTemplate {
         }
     }
 
-    Set<String> getTrailersForMovie(final String title) {
-        final String sql = "SELECT t.url FROM `trailers` AS t " +
-                "WHERE t.movie_id = (SELECT m.id FROM `movies` AS m WHERE m.title = ?)";
+    Set<String> getPostersForMovie(final String title) {
+        final String sql = "SELECT p.url FROM `posters` AS p " +
+                "WHERE p.movie_id = (SELECT m.id FROM `movies` AS m WHERE m.title = ?)";
         return new HashSet<>(getJdbcOperations().queryForList(sql, new Object[]{title}, String.class));
     }
 }

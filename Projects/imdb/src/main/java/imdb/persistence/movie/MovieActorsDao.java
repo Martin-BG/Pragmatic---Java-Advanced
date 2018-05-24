@@ -1,4 +1,4 @@
-package imdb.movie;
+package imdb.persistence.movie;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -28,7 +28,7 @@ public class MovieActorsDao extends NamedParameterJdbcTemplate {
         }
     }
 
-    Set<String> getActorssForMovie(final String title) {
+    Set<String> getActorsForMovie(final String title) {
         final String sql = "SELECT a.name FROM `movies_actors` AS ma " +
                 "LEFT JOIN `actors` AS a ON a.id = ma.actor_id " +
                 "WHERE ma.movie_id = (SELECT m.id FROM `movies` AS m WHERE m.title = ?)";

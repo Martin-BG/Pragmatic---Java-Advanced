@@ -1,4 +1,4 @@
-package imdb.user_movies;
+package imdb.persistence.user_movies;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,5 +1,6 @@
-package imdb.movie;
+package imdb.persistence.movie;
 
+import imdb.model.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;

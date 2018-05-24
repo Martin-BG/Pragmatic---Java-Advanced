@@ -1,7 +1,8 @@
-package imdb.user;
+package imdb.persistence.user;
 
-import imdb.rating.RatingService;
-import imdb.user_movies.UserMoviesService;
+import imdb.model.User;
+import imdb.persistence.rating.RatingService;
+import imdb.persistence.user_movies.UserMoviesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

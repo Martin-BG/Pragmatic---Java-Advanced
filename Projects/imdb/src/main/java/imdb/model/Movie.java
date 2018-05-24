@@ -1,4 +1,4 @@
-package imdb.movie;
+package imdb.model;
 
 import lombok.Data;
 

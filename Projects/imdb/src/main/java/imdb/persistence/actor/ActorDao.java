@@ -1,4 +1,4 @@
-package imdb.actor;
+package imdb.persistence.actor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;

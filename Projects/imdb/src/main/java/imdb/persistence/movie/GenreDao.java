@@ -1,4 +1,4 @@
-package imdb.movie;
+package imdb.persistence.movie;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -28,12 +28,6 @@ class GenreDao extends NamedParameterJdbcTemplate {
     boolean exists(final String genre) {
         String sql = "SELECT g.name FROM `genres` AS g WHERE g.name = ?";
         return genre.equals(getJdbcOperations().queryForObject(sql, new Object[]{genre}, String.class));
-    }
-
-    List<String> getGenresForMovie(final String title) {
-        final String sql = "SELECT g.name FROM `genres` AS g " +
-                "WHERE p.movie_id = (SELECT m.id FROM `movies` AS m WHERE m.title = ?)";
-        return getJdbcOperations().queryForList(sql, new Object[]{title}, String.class);
     }
 
     List<String> getAllGenres() {

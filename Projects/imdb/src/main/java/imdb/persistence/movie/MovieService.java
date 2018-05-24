@@ -1,9 +1,9 @@
-package imdb.movie;
+package imdb.persistence.movie;
 
-import imdb.actor.ActorService;
-import imdb.rating.RatingService;
-import imdb.user.UserService;
-import imdb.user_movies.UserMoviesService;
+import imdb.model.Movie;
+import imdb.persistence.actor.ActorService;
+import imdb.persistence.rating.RatingService;
+import imdb.persistence.user_movies.UserMoviesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,6 @@ public class MovieService {
     private final GenreDao genreDao;
     private final PosterDao posterDao;
     private final TrailerDao trailerDao;
-    private final UserService userService;
     private final ActorService actorService;
     private final RatingService ratingService;
     private final MovieActorsDao movieActorsDao;
@@ -29,7 +28,6 @@ public class MovieService {
                         final GenreDao genreDao,
                         final PosterDao posterDao,
                         final TrailerDao trailerDao,
-                        final UserService userService,
                         final ActorService actorService,
                         final RatingService ratingService,
                         final MovieActorsDao movieActorsDao,
@@ -39,7 +37,6 @@ public class MovieService {
         this.genreDao = genreDao;
         this.posterDao = posterDao;
         this.trailerDao = trailerDao;
-        this.userService = userService;
         this.actorService = actorService;
         this.ratingService = ratingService;
         this.movieActorsDao = movieActorsDao;
@@ -97,7 +94,7 @@ public class MovieService {
 
         movie.setTrailers(new HashSet<>(this.trailerDao.getTrailersForMovie(title)));
         movie.setPosters(new HashSet<>(this.posterDao.getPostersForMovie(title)));
-        movie.setActors(new HashSet<>(this.movieActorsDao.getActorssForMovie(title)));
+        movie.setActors(new HashSet<>(this.movieActorsDao.getActorsForMovie(title)));
         movie.setGenres(new HashSet<>(this.movieGenresDao.getGenresForMovie(title)));
         initRating(movie);
         initOwner(movie);

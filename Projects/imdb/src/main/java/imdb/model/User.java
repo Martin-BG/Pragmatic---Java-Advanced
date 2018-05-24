@@ -1,4 +1,4 @@
-package imdb.user;
+package imdb.model;
 
 import lombok.Data;
 

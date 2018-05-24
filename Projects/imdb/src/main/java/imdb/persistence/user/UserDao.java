@@ -1,5 +1,6 @@
-package imdb.user;
+package imdb.persistence.user;
 
+import imdb.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

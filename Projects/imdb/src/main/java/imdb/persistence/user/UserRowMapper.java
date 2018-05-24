@@ -1,5 +1,6 @@
-package imdb.user;
+package imdb.persistence.user;
 
+import imdb.model.User;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

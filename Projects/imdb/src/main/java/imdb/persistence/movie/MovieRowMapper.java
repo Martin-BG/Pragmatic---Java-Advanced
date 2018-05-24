@@ -1,5 +1,6 @@
-package imdb.movie;
+package imdb.persistence.movie;
 
+import imdb.model.Movie;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

@@ -1,10 +1,10 @@
 package imdb;
 
-import imdb.movie.Movie;
-import imdb.movie.MovieService;
-import imdb.rating.RatingService;
-import imdb.user.UserService;
-import imdb.user_movies.UserMoviesService;
+import imdb.model.Movie;
+import imdb.persistence.movie.MovieService;
+import imdb.persistence.rating.RatingService;
+import imdb.persistence.user.UserService;
+import imdb.persistence.user_movies.UserMoviesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
@@ -50,13 +50,13 @@ public class Terminal implements CommandLineRunner {
         System.out.println("Find valid movie: " + this.movieService.findByTitle("Dunkirk"));
         System.out.println("Find invalid movie: " + this.movieService.findByTitle("ZDunkirk"));
         Movie movie = this.movieService.findByTitle("12 Strong");
-        System.out.println("Add exisitng movie: " + this.movieService.add(movie));
+        System.out.println("Add existing movie: " + this.movieService.add(movie));
         movie = new Movie("Dummy Movie", 2018);
         movie.setOwner("pesho@abv.bg");
         movie.setActors(new HashSet<>(Arrays.asList("Toto", "Bobo", "Koko", "Chocho")));
         movie.setGenres(new HashSet<>(Arrays.asList("Undefined", "Unbearable", "Drama", "Comedy")));
         movie.setTrailers(new HashSet<>((Arrays.asList("http://unreachable.com/unknown", "localhost://temp/you-should-access-that-too"))));
-        movie.setPosters(new HashSet<>(Arrays.asList("Desctop/pictureOfMe.jpg", "https://noaccess/koko.png")));
+        movie.setPosters(new HashSet<>(Arrays.asList("Desktop/pictureOfMe.jpg", "https://noaccess/koko.png")));
         System.out.println("Adding new movie: " + this.movieService.add(movie));
         System.out.println("The movie itself: " + this.movieService.findByTitle("Dummy Movie"));
     }
