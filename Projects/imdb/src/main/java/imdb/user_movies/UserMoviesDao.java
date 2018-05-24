@@ -13,7 +13,7 @@ import java.util.List;
 class UserMoviesDao extends NamedParameterJdbcTemplate {
 
     @Autowired
-    public UserMoviesDao(final DataSource sqlDataSource) {
+    UserMoviesDao(final DataSource sqlDataSource) {
         super(sqlDataSource);
     }
 

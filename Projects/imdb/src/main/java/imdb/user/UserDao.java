@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 class UserDao extends NamedParameterJdbcTemplate {
 
     @Autowired
-    public UserDao(final DataSource sqlDataSource) {
+    UserDao(final DataSource sqlDataSource) {
         super(sqlDataSource);
     }
 
