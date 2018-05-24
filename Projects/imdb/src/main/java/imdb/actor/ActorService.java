@@ -1,7 +1,5 @@
-package imdb.actor.service;
+package imdb.actor;
 
-import imdb.actor.dao.ActorDao;
-import imdb.actor.model.Actor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +13,8 @@ public class ActorService {
         this.actorDao = actorDao;
     }
 
-    public boolean add(final Actor actor) {
+    public boolean add(final String actor) {
         return this.actorDao.add(actor);
     }
 
-    public Actor findByName(final String name) {
-        return this.actorDao.findByName(name);
-    }
 }
