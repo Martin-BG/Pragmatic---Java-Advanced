@@ -44,8 +44,7 @@ class RatingDao extends NamedParameterJdbcTemplate {
                 "`movie_id` = (SELECT m.id FROM `movies` AS m WHERE m.title = ?) AND " +
                 "`user_id` = (SELECT u.id FROM `users` AS u WHERE u.email = ?);";
         try {
-            return 1 == getJdbcOperations()
-                    .update(sql, movieTitle, userEmail);
+            return 1 == getJdbcOperations().update(sql, movieTitle, userEmail);
         } catch (DataAccessException e) {
             return false;
         }
