@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title><span th:text="#{application.name}"/></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/user.css}"/>
+</head>
+<body>
+<h1><span th:text="#{application.name}"/></h1>
+<p th:text="${message}"/>
+<p><a href="/user-login"><span th:text="#{user.login}"/></a></p>
+<p><a href="/user-register"><span th:text="#{user.register.form}"/></a></p>
+</body>
+</html>
