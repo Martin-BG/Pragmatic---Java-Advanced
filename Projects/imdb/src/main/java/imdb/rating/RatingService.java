@@ -3,7 +3,7 @@ package imdb.rating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 public final class RatingService {
@@ -15,27 +15,27 @@ public final class RatingService {
         this.ratingDao = ratingDao;
     }
 
-    public boolean add(final Rating rating) {
-        return this.ratingDao.add(rating);
+    public boolean add(final String movieTitle, final String userEmail, final int rating) {
+        return this.ratingDao.add(movieTitle, userEmail, rating);
     }
 
-    public boolean update(final Rating rating) {
-        return this.ratingDao.update(rating);
+    public boolean update(final String movieTitle, final String userEmail, final int rating) {
+        return this.ratingDao.update(movieTitle, userEmail, rating);
     }
 
-    public boolean delete(final Rating rating) {
-        return this.ratingDao.delete(rating);
+    public boolean delete(final String movieTitle, final String userEmail) {
+        return this.ratingDao.delete(movieTitle, userEmail);
     }
 
-    public Rating get(final String userEmail, final String movieTitle) {
-        return this.ratingDao.get(userEmail, movieTitle);
+    public Integer get(final String movieTitle, final String userEmail) {
+        return this.ratingDao.get(movieTitle, userEmail);
     }
 
-    public Set<Rating> getUserRatings(final String userEmail) {
+    public List<String> getUserRatings(final String userEmail) {
         return this.ratingDao.getAllForUser(userEmail);
     }
 
-    public Set<Rating> getMovieRatings(final String movieTitle) {
+    public List<Integer> getMovieRatings(final String movieTitle) {
         return this.ratingDao.getAllForMovie(movieTitle);
     }
 }
