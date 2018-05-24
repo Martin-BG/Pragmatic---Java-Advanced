@@ -11,7 +11,6 @@ CREATE TABLE `movies` (
 );
 
 CREATE TABLE `trailers` (
-  `id`       INT PRIMARY KEY AUTO_INCREMENT,
   `movie_id` INT          NOT NULL,
   `url`      VARCHAR(255) NOT NULL UNIQUE,
   CONSTRAINT `fk_trailers_movies` FOREIGN KEY (`movie_id`)
@@ -20,7 +19,6 @@ CREATE TABLE `trailers` (
 );
 
 CREATE TABLE `posters` (
-  `id`       INT PRIMARY KEY AUTO_INCREMENT,
   `movie_id` INT          NOT NULL,
   `url`      VARCHAR(255) NOT NULL UNIQUE,
   CONSTRAINT `fk_posters_movies` FOREIGN KEY (`movie_id`)
