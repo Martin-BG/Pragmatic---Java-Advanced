@@ -2,6 +2,7 @@ package imdb.persistence.user;
 
 import imdb.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -18,7 +19,11 @@ class UserDao extends NamedParameterJdbcTemplate {
 
     boolean add(final String email, final String password) {
         final String sql = "INSERT INTO `users` (`email`, `password`) VALUES (?, ?)";
-        return 1 == getJdbcOperations().update(sql, email, password);
+        try {
+            return 1 == getJdbcOperations().update(sql, email, password);
+        } catch (DataAccessException e) {
+            return false;
+        }
     }
 
     User get(final String email) {
