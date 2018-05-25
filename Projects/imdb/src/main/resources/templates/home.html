@@ -7,6 +7,31 @@
 </head>
 <body>
 <h1><span th:text="#{application.name}"/></h1>
+
+<table border="1">
+    <tr>
+        <th>Title</th>
+        <th>Year</th>
+        <th>Rating</th>
+        <th>Votes</th>
+        <th>User</th>
+        <th>Genres</th>
+        <th>Actors</th>
+        <th>Posters</th>
+        <th>Trailers</th>
+    </tr>
+    <tr th:each="movie : ${movies}">
+        <td th:text="${movie.title}"></td>
+        <td th:text="${movie.year}"></td>
+        <td th:text="${movie.rating}"></td>
+        <td th:text="${movie.votes}"></td>
+        <td th:text="${movie.owner}"></td>
+        <td th:text="${movie.genres}"></td>
+        <td th:text="${movie.actors}"></td>
+        <td th:text="${movie.posters}"></td>
+        <td th:text="${movie.trailers}"></td>
+    </tr>
+</table>
 <p th:text="${message}"/>
 <p><a href="/user-login"><span th:text="#{user.login}"/></a></p>
 <p><a href="/user-register"><span th:text="#{user.register.form}"/></a></p>

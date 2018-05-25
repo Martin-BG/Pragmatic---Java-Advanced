@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieService {
@@ -100,5 +101,16 @@ public class MovieService {
         initOwner(movie);
 
         return movie;
+    }
+
+    public List<String> getAllTitles() {
+        return this.movieDao.getAllTitles();
+    }
+
+    public List<Movie> getAllMovies() {
+        return this.getAllTitles()
+                .stream()
+                .map(this::findByTitle)
+                .collect(Collectors.toList());
     }
 }
