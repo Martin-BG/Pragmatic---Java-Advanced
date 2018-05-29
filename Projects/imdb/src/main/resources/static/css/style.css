@@ -62,12 +62,16 @@ footer {
     text-align: center;
     letter-spacing: 5px;
     font-size: 40px;
+    margin: 20px;
 }
 
 #message {
     text-align: center;
     font-size: 24px;
     color: #9b1616;
+    position: fixed;
+    bottom: 40px;
+    width: 100%;
 }
 
 .user-form {
