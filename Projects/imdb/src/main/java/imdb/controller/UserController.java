@@ -40,10 +40,13 @@ public class UserController {
                                      @RequestParam(name = "email", defaultValue = "") final String email,
                                      @RequestParam(name = "password", defaultValue = "") final String password,
                                      @RequestParam(name = "passwordConfirm", defaultValue = "") final String passwordConfirm) {
-        if (email.isEmpty() || password.isEmpty() || !password.equals(passwordConfirm)) {
-            if (!password.equals(passwordConfirm)) {
-                view.getModel().put("message", this.messages.get("password.mismatch"));
-            }
+        if (email.isEmpty() && password.isEmpty() && passwordConfirm.isEmpty()) {
+            view.setViewName("/register");
+        } else if (email.isEmpty()) {
+            view.getModel().put("message", this.messages.get("email.empty"));
+            view.setViewName("/register");
+        } else if (password.isEmpty() || !password.equals(passwordConfirm)) {
+            view.getModel().put("message", this.messages.get("password.mismatch"));
             view.setViewName("/register");
         } else {
             if (this.userService.register(email, password)) {
