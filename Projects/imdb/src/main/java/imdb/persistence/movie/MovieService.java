@@ -7,6 +7,7 @@ import imdb.persistence.user_movies.UserMoviesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -150,6 +151,9 @@ public class MovieService {
             );
             filter.append("AND u.email LIKE ? ");
             isLikeTypeSearch = true;
+            break;
+        default:    // Invalid search criteria
+            return new ArrayList<>();
         }
 
         query.append(filter)
