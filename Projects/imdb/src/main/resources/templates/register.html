@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>[[#{application.name}]]</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<header>
+    <nav id="topmenu">
+        <ul>
+            <li><a href="/index"><span th:text="#{navigation.index}"/></a></li>
+            <li><a href="/login"><span th:text="#{navigation.login}"/></a></li>
+        </ul>
+    </nav>
+    <h1 id="page-heading"><span th:text="#{page.register}"/></h1>
+</header>
+<section>
+    <div class="user-form">
+        <form method="post">
+            <label for="email"><span th:text="#{user.email}"/></label>
+            <input type="text"
+                   id="email"
+                   name="email"
+                   minlength="5"
+                   maxlength="30"
+                   pattern="^(?=\w)(?:\w+\.?)*\w+(?<=\w)@(?:\w+\.)+\w+$"
+                   autocomplete="off"
+                   required>
+            <br>
+
+            <label for="password"><span th:text="#{user.password}"/></label>
+            <input type="password"
+                   id="password"
+                   name="password"
+                   maxlength="30"
+                   autocomplete="off"
+                   required>
+            <br>
+
+            <label for="passwordConfirm"><span th:text="#{user.passwordConfirm}"/></label>
+            <input type="password"
+                   id="passwordConfirm"
+                   name="passwordConfirm"
+                   autocomplete="off"
+                   required>
+            <br>
+            <br>
+
+            <button type="submit"><span th:text="#{button.register}"/></button>
+            <br>
+        </form>
+    </div>
+</section>
+<section>
+    <p id="message" th:text="${message}"/>
+</section>
+<footer>
+    <p>&copy; Copyright 2018 M.</p>
+</footer>
+</body>
+</html>

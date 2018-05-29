@@ -1,0 +1,147 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #cccccc;
+}
+
+nav#topmenu ul {
+    list-style: none;
+    background-color: #444;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+nav#topmenu li {
+    font-size: 24px;
+    line-height: 40px;
+    height: 40px;
+    display: inline-block;
+    padding: 20px;
+}
+
+nav#topmenu a {
+    text-decoration: none;
+    color: #fff;
+
+}
+
+nav#topmenu a:hover {
+    color: #cbdcff;
+    border-bottom: 2px solid #cbdcff;
+}
+
+span#username {
+    font-size: 24px;
+    text-align: left;
+    position: absolute;
+    /*line-height: 40px;*/
+    /*height: 40px;*/
+    display: inline-block;
+    /*padding: 20px;*/
+    text-decoration: none;
+    margin: 24px;
+    color: #fff;
+}
+
+section {
+    margin-left: 20px;
+    align-content: center;
+}
+
+footer {
+    background: #444;
+    color: #ffffff;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#page-heading {
+    text-align: center;
+    letter-spacing: 5px;
+    font-size: 40px;
+}
+
+#message {
+    text-align: center;
+    font-size: 24px;
+    color: #9b1616;
+}
+
+.user-form {
+    text-align: center;
+    padding-top: 30px;
+    margin: 10px;
+}
+
+label {
+    display: inline-block;
+    text-align: left;
+    font-size: 24px;
+    width: 10%;
+    min-width: 10em;
+}
+
+input {
+    display: inline-block;
+    text-align: left;
+    font-size: 20px;
+    width: 20%;
+    min-width: 20em;
+    margin: 8px;
+}
+
+button {
+    display: inline-block;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 24px;
+    text-decoration: none;
+    background: #0069ed;
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out,
+    transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border-radius: 3px;
+}
+
+button:hover,
+button:focus {
+    background: #0053ba;
+}
+
+button:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+button:active {
+    transform: scale(0.99);
+}
+
+table {
+    padding: 0;
+    margin: 0;
+    border-collapse: collapse;
+    width: 99%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+th {
+    background-color: #0069ed;
+    color: white;
+}
