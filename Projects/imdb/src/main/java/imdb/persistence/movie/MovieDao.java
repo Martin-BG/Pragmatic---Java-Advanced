@@ -40,4 +40,8 @@ class MovieDao extends NamedParameterJdbcTemplate {
         final String sql = "SELECT m.title FROM `movies` AS m";
         return getJdbcOperations().queryForList(sql, String.class);
     }
+
+    List<String> findByCriteria(final String sql, final String criteria) {
+        return getJdbcOperations().queryForList(sql, new Object[]{criteria}, String.class);
+    }
 }

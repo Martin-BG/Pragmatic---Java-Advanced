@@ -45,6 +45,12 @@ public class MovieService {
         this.userMoviesService = userMoviesService;
     }
 
+    public boolean add(final String title, final Integer year, final String owner) {
+        Movie movie = new Movie(title, year);
+        movie.setOwner(owner);
+        return this.add(movie);
+    }
+
     public boolean add(final Movie movie) {
         if (!this.movieDao.add(movie)) {
             return false;
@@ -109,6 +115,48 @@ public class MovieService {
 
     public List<Movie> getAllMovies() {
         return this.getAllTitles()
+                .stream()
+                .map(this::findByTitle)
+                .collect(Collectors.toList());
+    }
+
+    public List<Movie> findByCriteria(final String param, final String value) {
+        final StringBuilder query = new StringBuilder("SELECT m.title FROM `movies` AS m ");
+        final StringBuilder filter = new StringBuilder("WHERE 1 = 1 ");
+        boolean isLikeTypeSearch = false;
+
+        switch (param) {
+        case "title":
+            filter.append("AND m.title LIKE ? ");
+            isLikeTypeSearch = true;
+            break;
+        case "year":
+            filter.append("AND m.year = ? ");
+            break;
+        case "actor":
+            query.append("LEFT JOIN `movies_actors` AS ma ON ma.movie_id = m.id " +
+                    "LEFT JOIN `actors` AS a ON a.id = ma.actor_id ");
+            filter.append("AND a.name LIKE ? ");
+            isLikeTypeSearch = true;
+            break;
+        case "genre":
+            query.append("LEFT JOIN `movies_genres` AS mg ON mg.movie_id = m.id " +
+                    "LEFT JOIN `genres` AS g ON g.id = mg.genre_id ");
+            filter.append("AND g.name = ? ");
+            break;
+        case "user":
+            query.append("LEFT JOIN `users_movies` AS um ON um.movie_id = m.id " +
+                    "LEFT JOIN `users` AS u ON u.id = um.user_id "
+            );
+            filter.append("AND u.email LIKE ? ");
+            isLikeTypeSearch = true;
+        }
+
+        query.append(filter)
+                .append("GROUP BY m.id;");
+
+        return this.movieDao
+                .findByCriteria(query.toString(), isLikeTypeSearch ? ("%" + value + "%") : value)
                 .stream()
                 .map(this::findByTitle)
                 .collect(Collectors.toList());

@@ -44,6 +44,26 @@ public class Terminal implements CommandLineRunner {
 
         System.out.println("MOVIES MAIN DEMO:");
         moviesMainDemo();
+
+        System.out.println("MOVIES SEARCH DEMO:");
+        searchDemo();
+    }
+
+    private void searchDemo() {
+        System.out.println("Action movies [genre]:");
+        this.movieService.findByCriteria("genre", "action").forEach(System.out::println);
+
+        System.out.println("'Dunk' [partial title] movies:");
+        this.movieService.findByCriteria("title", "Dunk").forEach(System.out::println);
+
+        System.out.println("2017 year movies:");
+        this.movieService.findByCriteria("year", "2017").forEach(System.out::println);
+
+        System.out.println("'Hanks' [actor partial name] movies:");
+        this.movieService.findByCriteria("actor", "Hanks").forEach(System.out::println);
+
+        System.out.println("'pesho' [user partial name] movies:");
+        this.movieService.findByCriteria("user", "pesho").forEach(System.out::println);
     }
 
     private void moviesMainDemo() {
