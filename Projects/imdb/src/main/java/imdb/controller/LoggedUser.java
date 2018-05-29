@@ -7,7 +7,7 @@ class LoggedUser {
 
     private String loggedUserIdentity;
 
-    boolean isUserLogged() {
+    boolean isNotLogged() {
         return this.loggedUserIdentity == null;
     }
 
