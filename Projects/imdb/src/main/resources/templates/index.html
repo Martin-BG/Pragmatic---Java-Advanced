@@ -14,13 +14,13 @@
             <li><a href="/login"><span th:text="#{navigation.login}"/></a></li>
         </ul>
     </nav>
-    <h1 id="page-heading">Welcome to <span th:text="#{application.name}"/></h1>
+    <h1 id="page-heading"><span th:text="#{page.index} + #{application.name}"/></h1>
 </header>
 <section>
     <p id="message" th:text="${message}"/>
 </section>
 <footer>
-    <p>&copy; Copyright 2018 M.</p>
+    <p><span th:text="#{footer.text}"/></p>
 </footer>
 </body>
 </html>
