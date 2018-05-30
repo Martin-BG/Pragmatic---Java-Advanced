@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,7 +48,7 @@ public class MovieService {
     }
 
     public boolean add(final String title, final Integer year, final String owner) {
-        Movie movie = new Movie(title, year);
+        final Movie movie = new Movie(title, year);
         movie.setOwner(owner);
         return this.add(movie);
     }
@@ -78,12 +79,12 @@ public class MovieService {
 
         for (final String genre : movie.getGenres()) {
             this.genreDao.add(genre);
-            movieGenresDao.add(title, genre);
+            this.movieGenresDao.add(title, genre);
         }
 
-        initRating(movie);
+        this.initRating(movie);
 
-        initOwner(movie);
+        this.initOwner(movie);
 
         return true;
     }
@@ -122,6 +123,16 @@ public class MovieService {
         return this.getAllTitles()
                 .stream()
                 .map(this::findByTitle)
+                .collect(Collectors.toList());
+    }
+
+    public List<Movie> getTopRated(final long count, final Double minRate) {
+        return this.getAllTitles()
+                .stream()
+                .map(this::findByTitle)
+                .filter(m -> !Double.isNaN(m.getRating()) && Double.compare(minRate, m.getRating()) <= 0)
+                .sorted(Comparator.comparingDouble(Movie::getRating).reversed())
+                .limit(count)
                 .collect(Collectors.toList());
     }
 
