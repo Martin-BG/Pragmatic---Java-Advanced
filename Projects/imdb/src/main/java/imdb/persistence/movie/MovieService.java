@@ -57,6 +57,10 @@ public class MovieService {
             return false;
         }
 
+        if (movie.getOwner() != null) {
+            this.userMoviesService.add(movie.getTitle(), movie.getOwner());
+        }
+
         final String title = movie.getTitle();
 
         for (final String poster : movie.getPosters()) {
