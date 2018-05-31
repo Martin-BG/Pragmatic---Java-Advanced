@@ -160,7 +160,7 @@ public class MovieService {
                     "LEFT JOIN `genres` AS g ON g.id = mg.genre_id ");
             filter.append("AND g.name = ? ");
             break;
-        case "user":
+        case "owner":
             query.append("LEFT JOIN `users_movies` AS um ON um.movie_id = m.id " +
                     "LEFT JOIN `users` AS u ON u.id = um.user_id "
             );
