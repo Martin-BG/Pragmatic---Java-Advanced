@@ -1,0 +1,76 @@
+table {
+    padding: 0;
+    margin: 0;
+    border-collapse: collapse;
+    width: 99%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+th {
+    background-color: #0069ed;
+    color: white;
+}
+
+.middle {
+    position: absolute;
+    width: 96%;
+    height: 60%;
+    overflow: auto;
+}
+
+table {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 1px;
+}
+
+table thead {
+    flex: 0 0 auto;
+    width: calc(100% - 0.9em);
+}
+
+table tbody {
+    flex: 1 1 auto;
+    display: block;
+    overflow-y: auto;
+}
+
+table tbody tr {
+    width: 100%;
+}
+
+table thead,
+table tbody tr {
+    display: table;
+    table-layout: fixed;
+}
+
+tbody td,
+thead th {
+    border-right: 1px solid transparent;
+    vertical-align: middle;
+}
+
+thead th {
+    text-align: left;
+    text-transform: uppercase;
+}
+
+tbody td {
+    text-align: left;
+}
+
+.table-cont {
+    width: 100%;
+}
