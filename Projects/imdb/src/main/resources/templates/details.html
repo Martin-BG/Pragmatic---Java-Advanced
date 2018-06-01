@@ -4,6 +4,13 @@
     <title>[[#{application.name}]]</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+
+    <style>
+        img {
+            display: inline-block;
+        }
+    </style>
+
 </head>
 <body>
 <header>
@@ -19,43 +26,47 @@
             <li><a href="/index"><span th:text="#{navigation.index}"/></a></li>
             <li><a href="/search"><span th:text="#{navigation.search}"/></a></li>
             <li><a href="/register"><span th:text="#{navigation.register}"/></a></li>
+            <li><a href="/login"><span th:text="#{navigation.login}"/></a></li>
         </ul>
     </nav>
-    <h1 id="page-heading"><span th:text="#{page.login}"/></h1>
+    <h1 id="page-heading"><span th:text="#{page.details}"/></h1>
 </header>
 <section>
-    <div class="user-form">
-        <form method="post">
-            <label for="email"><span th:text="#{user.email}"/></label>
-            <input type="text"
-                   id="email"
-                   name="email"
-                   minlength="5"
-                   maxlength="30"
-                   pattern="^(?=\w)(?:\w+\.?)*\w+(?<=\w)@(?:\w+\.)+\w+$"
-                   autocomplete="on"
-                   required>
-            <br>
+    <h1 th:text="${movie.title} + ' ' + (${movie.year})" align="center"></h1>
 
-            <label for="password"><span th:text="#{user.password}"/></label>
-            <input type="password"
-                   id="password"
-                   name="password"
-                   maxlength="30"
-                   autocomplete="off"
-                   required>
-            <br>
+    <div th:each="url: ${movie.posters}">
+        <img th:src="@{${url}}" width="auto" height="400px"/>
+    </div>
 
-            <button type="submit"><span th:text="#{button.login}"/></button>
-            <br>
-        </form>
+    <h3 th:text="Rating + ${movie.rating}"></h3>
+    <h4 th:text="${movie.votes}"></h4>
+    <h4 th:text="${movie.owner}"></h4>
+    <div th:each="genre : ${movie.genres}">
+        <h4 th:text="${genre}"/>
+    </div>
+    <div th:each="actor : ${movie.actors}">
+        <h4 th:text="${actor}"/>
+    </div>
+    <!--TODO - embed trailer player -->
+    <!--
+        <body>
+        <video width="300" height="250" controls>
+            <source src="movie2.mp4" type="video/mp4">
+            <source src="movie2.ogg" type="video/ogg">
+            Your Browser does not support video.
+        </video>
+        </body>-->
+
+    <div th:each="url, iterStat : ${movie.trailers}">
+        <a th:href="${url}" th:text="Trailer + ' ' + ${iterStat.count}" target="_blank"/>
     </div>
 </section>
 <section>
     <p id="message" th:text="${message}"/>
 </section>
-<footer>
+<!--TODO - fix page layout and re-enable footer-->
+<!--<footer>
     <p><span th:text="#{footer.text}"/></p>
-</footer>
+</footer>-->
 </body>
 </html>

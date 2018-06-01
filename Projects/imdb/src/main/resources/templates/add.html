@@ -12,41 +12,37 @@
         <ul th:if="${username != null}">
             <li><a href="/index"><span th:text="#{navigation.home}"/></a></li>
             <li><a href="/search"><span th:text="#{navigation.search}"/></a></li>
-            <li><a href="/add"><span th:text="#{navigation.add}"/></a></li>
             <li><a href="/logout"><span th:text="#{navigation.logout}"/></a></li>
         </ul>
         <ul th:if="${username == null}">
             <li><a href="/index"><span th:text="#{navigation.index}"/></a></li>
             <li><a href="/search"><span th:text="#{navigation.search}"/></a></li>
             <li><a href="/register"><span th:text="#{navigation.register}"/></a></li>
+            <li><a href="/login"><span th:text="#{navigation.login}"/></a></li>
         </ul>
     </nav>
-    <h1 id="page-heading"><span th:text="#{page.login}"/></h1>
+    <h1 id="page-heading"><span th:text="#{page.add}"/></h1>
 </header>
 <section>
     <div class="user-form">
         <form method="post">
-            <label for="email"><span th:text="#{user.email}"/></label>
+            <label for="title" th:text="#{add.title}"/>
             <input type="text"
-                   id="email"
-                   name="email"
-                   minlength="5"
-                   maxlength="30"
-                   pattern="^(?=\w)(?:\w+\.?)*\w+(?<=\w)@(?:\w+\.)+\w+$"
-                   autocomplete="on"
-                   required>
-            <br>
-
-            <label for="password"><span th:text="#{user.password}"/></label>
-            <input type="password"
-                   id="password"
-                   name="password"
-                   maxlength="30"
+                   id="title"
+                   name="title"
                    autocomplete="off"
                    required>
             <br>
 
-            <button type="submit"><span th:text="#{button.login}"/></button>
+            <label for="year" th:text="#{add.year}"/>
+            <input type="number"
+                   id="year"
+                   name="year"
+                   autocomplete="off"
+                   required>
+            <br>
+
+            <button type="submit" th:text="#{button.add}"/>
             <br>
         </form>
     </div>

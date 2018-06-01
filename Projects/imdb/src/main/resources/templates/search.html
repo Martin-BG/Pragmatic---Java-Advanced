@@ -11,42 +11,38 @@
         <span th:if="${username != null}" id="username" th:text="#{user.logged} + ${username}"/>
         <ul th:if="${username != null}">
             <li><a href="/index"><span th:text="#{navigation.home}"/></a></li>
-            <li><a href="/search"><span th:text="#{navigation.search}"/></a></li>
             <li><a href="/add"><span th:text="#{navigation.add}"/></a></li>
             <li><a href="/logout"><span th:text="#{navigation.logout}"/></a></li>
         </ul>
         <ul th:if="${username == null}">
             <li><a href="/index"><span th:text="#{navigation.index}"/></a></li>
-            <li><a href="/search"><span th:text="#{navigation.search}"/></a></li>
             <li><a href="/register"><span th:text="#{navigation.register}"/></a></li>
+            <li><a href="/login"><span th:text="#{navigation.login}"/></a></li>
         </ul>
     </nav>
-    <h1 id="page-heading"><span th:text="#{page.login}"/></h1>
+    <h1 id="page-heading"><span th:text="#{page.search}"/></h1>
 </header>
 <section>
     <div class="user-form">
         <form method="post">
-            <label for="email"><span th:text="#{user.email}"/></label>
+            <!--TODO drop-down list with valid search parameters-->
+            <label for="param" th:text="#{search.parameter}"/>
             <input type="text"
-                   id="email"
-                   name="email"
-                   minlength="5"
-                   maxlength="30"
-                   pattern="^(?=\w)(?:\w+\.?)*\w+(?<=\w)@(?:\w+\.)+\w+$"
+                   id="param"
+                   name="param"
                    autocomplete="on"
                    required>
             <br>
 
-            <label for="password"><span th:text="#{user.password}"/></label>
-            <input type="password"
-                   id="password"
-                   name="password"
-                   maxlength="30"
-                   autocomplete="off"
+            <label for="value" th:text="#{search.value}"/>
+            <input type="text"
+                   id="value"
+                   name="value"
+                   autocomplete="on"
                    required>
             <br>
 
-            <button type="submit"><span th:text="#{button.login}"/></button>
+            <button type="submit" th:text="#{button.search}"/>
             <br>
         </form>
     </div>

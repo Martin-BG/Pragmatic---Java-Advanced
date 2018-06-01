@@ -4,23 +4,90 @@
     <title>[[#{application.name}]]</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/table.css}"/>
 </head>
 <body>
 <header>
     <nav id="topmenu">
-        <ul>
+        <span th:if="${username != null}" id="username" th:text="#{user.logged} + ${username}"/>
+        <ul th:if="${username != null}">
+            <li><a href="/search"><span th:text="#{navigation.search}"/></a></li>
+            <li><a href="/add"><span th:text="#{navigation.add}"/></a></li>
+            <li><a href="/logout"><span th:text="#{navigation.logout}"/></a></li>
+        </ul>
+        <ul th:if="${username == null}">
             <li><a href="/search"><span th:text="#{navigation.search}"/></a></li>
             <li><a href="/register"><span th:text="#{navigation.register}"/></a></li>
             <li><a href="/login"><span th:text="#{navigation.login}"/></a></li>
         </ul>
     </nav>
-    <h1 id="page-heading"><span th:text="#{page.index} + #{application.name}"/></h1>
+    <h1 id="page-heading" th:if="${username != null}" th:text="#{page.home}"/></h1>
+    <h1 id="page-heading" th:if="${username == null}" th:text="#{page.index} + #{application.name}"/></h1>
+    <!--<h1 id="page-heading"><span th:text="#{page.home}"/></h1>-->
+    <!--<h1 id="page-heading"><span th:text="#{page.index} + #{application.name}"/></h1>-->
 </header>
+<section class="middle">
+    <table class="table-cont">
+        <thead>
+        <!--TODO: Implement sort by current column on header click:
+        Sort a copy of the given list. The members of the list must implement
+        comparable or you must define a comparator:
+        ${#lists.sort(list)}
+        ${#lists.sort(list, comparator)}-->
+        <tr>
+            <th th:text="#{table.title}"/>
+            <th th:text="#{table.year}"/>
+            <th th:text="#{table.rating}"/>
+            <th th:text="#{table.votes}"/>
+            <th th:text="#{table.user}"/>
+            <th th:text="#{table.genres}"/>
+            <th th:text="#{table.actors}"/>
+            <th th:text="#{table.posters}"/>
+            <th th:text="#{table.trailers}"/>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="movie : ${movies}">
+            <td>
+                <a th:href="@{/details(title=${movie.title})}" th:text="${movie.title}"/>
+            </td>
+            <td>
+                <a th:href="@{/search(param=year,value=${movie.year})}" th:text="${movie.year}"/>
+            </td>
+            <td th:text="${movie.rating}"/>
+            <td th:text="${movie.votes}"/>
+            <td>
+                <a th:href="@{/search(param=owner,value=${movie.owner})}" th:text="${movie.owner}"/>
+            </td>
+            <td>
+                <div th:each="genre : ${movie.genres}">
+                    <a th:href="@{/search(param=genre,value=${genre})}" th:text="${genre}"/>
+                </div>
+            </td>
+            <td>
+                <div th:each="actor : ${movie.actors}">
+                    <a th:href="@{/search(param=actor,value=${actor})}" th:text="${actor}"/>
+                </div>
+            </td>
+            <td>
+                <div th:each="url, iterStat : ${movie.posters}">
+                    <a th:href="${url}" th:text="Poster + ' ' + ${iterStat.count}" target="_blank"/>
+                </div>
+            </td>
+            <td>
+                <div th:each="url, iterStat : ${movie.trailers}">
+                    <a th:href="${url}" th:text="Trailer + ' ' + ${iterStat.count}" target="_blank"/>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
 <section>
     <p id="message" th:text="${message}"/>
 </section>
 <footer>
-    <p><span th:text="#{footer.text}"/></p>
+    <p th:text="#{footer.text}"/>
 </footer>
 </body>
 </html>

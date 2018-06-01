@@ -19,37 +19,13 @@
             <li><a href="/index"><span th:text="#{navigation.index}"/></a></li>
             <li><a href="/search"><span th:text="#{navigation.search}"/></a></li>
             <li><a href="/register"><span th:text="#{navigation.register}"/></a></li>
+            <li><a href="/login"><span th:text="#{navigation.login}"/></a></li>
         </ul>
     </nav>
-    <h1 id="page-heading"><span th:text="#{page.login}"/></h1>
+    <h1 id="page-heading"><span th:text="#{page.edit}"/></h1>
 </header>
 <section>
-    <div class="user-form">
-        <form method="post">
-            <label for="email"><span th:text="#{user.email}"/></label>
-            <input type="text"
-                   id="email"
-                   name="email"
-                   minlength="5"
-                   maxlength="30"
-                   pattern="^(?=\w)(?:\w+\.?)*\w+(?<=\w)@(?:\w+\.)+\w+$"
-                   autocomplete="on"
-                   required>
-            <br>
-
-            <label for="password"><span th:text="#{user.password}"/></label>
-            <input type="password"
-                   id="password"
-                   name="password"
-                   maxlength="30"
-                   autocomplete="off"
-                   required>
-            <br>
-
-            <button type="submit"><span th:text="#{button.login}"/></button>
-            <br>
-        </form>
-    </div>
+    <!--TODO - implement movie edit UI-->
 </section>
 <section>
     <p id="message" th:text="${message}"/>

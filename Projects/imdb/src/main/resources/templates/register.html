@@ -8,8 +8,16 @@
 <body>
 <header>
     <nav id="topmenu">
-        <ul>
+        <span th:if="${username != null}" id="username" th:text="#{user.logged} + ${username}"/>
+        <ul th:if="${username != null}">
+            <li><a href="/index"><span th:text="#{navigation.home}"/></a></li>
+            <li><a href="/search"><span th:text="#{navigation.search}"/></a></li>
+            <li><a href="/add"><span th:text="#{navigation.add}"/></a></li>
+            <li><a href="/logout"><span th:text="#{navigation.logout}"/></a></li>
+        </ul>
+        <ul th:if="${username == null}">
             <li><a href="/index"><span th:text="#{navigation.index}"/></a></li>
+            <li><a href="/search"><span th:text="#{navigation.search}"/></a></li>
             <li><a href="/login"><span th:text="#{navigation.login}"/></a></li>
         </ul>
     </nav>
