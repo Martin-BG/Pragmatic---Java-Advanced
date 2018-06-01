@@ -111,7 +111,7 @@ public class MovieController {
                                      @RequestParam(name = "title", defaultValue = "") final String title) {
         final Movie movie = title.isEmpty() ? null : this.movieService.findByTitle(title);
         if (movie == null) {
-            redirectAttributes.addFlashAttribute("message", "Movie not found!");
+            redirectAttributes.addFlashAttribute("message", this.messages.get("movie.not-found"));
             view.setViewName("redirect:/index");
         } else {
             view.getModel().put("movie", movie);
