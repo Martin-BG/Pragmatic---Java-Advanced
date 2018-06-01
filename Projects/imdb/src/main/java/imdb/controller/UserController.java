@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -36,7 +37,6 @@ public class UserController {
 
     @RequestMapping(value = {"/register", "/register.html"}, method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView registerUser(final ModelAndView view,
-                                     final RedirectAttributes redirectAttributes,
                                      @RequestParam(name = "email", defaultValue = "") final String email,
                                      @RequestParam(name = "password", defaultValue = "") final String password,
                                      @RequestParam(name = "passwordConfirm", defaultValue = "") final String passwordConfirm) {
@@ -51,7 +51,7 @@ public class UserController {
         } else {
             if (this.userService.register(email, password)) {
                 this.loggedUser.loginUser(email);
-                view.setViewName("redirect:/home");
+                view.setViewName("redirect:/index");
             } else {
                 view.getModel().put("message", this.messages.get("registration.failed"));
                 view.setViewName("/register");
@@ -68,7 +68,7 @@ public class UserController {
                                   @RequestParam(name = "password", required = false, defaultValue = "") final String password) {
         if (!this.loggedUser.isNotLogged()) {
             redirectAttributes.addFlashAttribute("message", this.messages.get("logout.first"));
-            view.setViewName("redirect:/home");
+            view.setViewName("redirect:/index");
         } else if (email.isEmpty() || password.isEmpty()) {
             view.setViewName("/login");
         } else if (!this.userService.areCredentialsValid(email, password)) {
@@ -76,33 +76,39 @@ public class UserController {
             view.setViewName("/login");
         } else {
             this.loggedUser.loginUser(email);
-            view.setViewName("redirect:/home");
+            view.setViewName("redirect:/index");
         }
 
         return view;
     }
 
-    @RequestMapping(value = {"/home", "/home.html"}, method = {RequestMethod.POST, RequestMethod.GET})
-    public ModelAndView userHome(final ModelAndView view, final RedirectAttributes redirectAttributes) {
-        if (this.loggedUser.isNotLogged()) {
-            redirectAttributes.addFlashAttribute("message", this.messages.get("login.required"));
-            view.setViewName("redirect:/login");
-        } else {
-            final List<String> userTitles = this.userService.getUserTitles(this.loggedUser.getLoggedUserIdentity());
-            final List<Movie> userMovies = this.movieService.getAllMovies()
-                    .stream()
-                    .filter(m -> userTitles.contains(m.getTitle()))
-                    .collect(Collectors.toList());
-            view.getModel().put("myMovies", userMovies);
-            view.getModel().put("username", this.loggedUser.getLoggedUserIdentity());
-            view.setViewName("/home");
+    @SuppressWarnings("unchecked")
+    @RequestMapping(value = {"/", "/index", "/index.html"}, method = {RequestMethod.POST, RequestMethod.GET})
+    public ModelAndView userHome(final ModelAndView view,
+                                 final HttpServletRequest request) {
+
+        final Map<String, Object> attribute = (Map<String, Object>)
+                request.getAttribute("org.springframework.web.servlet.DispatcherServlet.INPUT_FLASH_MAP");
+        // Add current user's or top rated movies if "movies" attribute is not present in request
+        if (attribute == null || !attribute.containsKey("movies")) {
+            final List<Movie> movies = this.loggedUser.isNotLogged() ?
+                    this.movieService.getTopRated(10, 0.0d) :
+                    this.movieService.findByCriteria("owner", this.loggedUser.getLoggedUserIdentity());
+            view.getModel().put("movies", movies);
         }
+
+        if (!this.loggedUser.isNotLogged()) {
+            view.getModel().put("username", this.loggedUser.getLoggedUserIdentity());
+        }
+
+        view.setViewName("/index");
 
         return view;
     }
 
     @RequestMapping(value = {"/logout", "/logout.html"}, method = {RequestMethod.POST, RequestMethod.GET})
-    public ModelAndView logoutUser(final ModelAndView view, final RedirectAttributes redirectAttributes) {
+    public ModelAndView logoutUser(final ModelAndView view,
+                                   final RedirectAttributes redirectAttributes) {
         if (this.loggedUser.isNotLogged()) {
             redirectAttributes.addFlashAttribute("message", this.messages.get("login.required"));
         } else {
@@ -112,18 +118,6 @@ public class UserController {
         }
 
         view.setViewName("redirect:/index");
-        return view;
-    }
-
-    @RequestMapping(value = {"/", "/index", "/index.html"}, method = {RequestMethod.POST, RequestMethod.GET})
-    public ModelAndView indexPage(final ModelAndView view, final RedirectAttributes redirectAttributes) {
-        if (this.loggedUser.isNotLogged()) {
-            view.setViewName("/index");
-        } else {
-            redirectAttributes.addFlashAttribute("message", this.messages.get("logout.first"));
-            view.setViewName("redirect:/home");
-        }
-
         return view;
     }
 }
