@@ -63,9 +63,11 @@ INSERT INTO `users_movies` (`user_id`, `movie_id`) VALUES
 
 INSERT INTO `posters` (`movie_id`, `url`) VALUES
   (4, 'http://i0.kym-cdn.com/photos/images/original/001/254/427/32c.jpg'),
+  (4,
+   'https://m.media-amazon.com/images/M/MV5BZTAwMzAxNDEtM2FiNC00ODY2LTk1ZTctOTkyNmJlMmE0Y2IzXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_SY1000_CR0,0,682,1000_AL_.jpg'),
   (3, 'http://www.impawards.com/2017/posters/post_ver2_xlg.jpg');
 
 INSERT INTO `trailers` (`movie_id`, `url`) VALUES
-  (4, 'https://www.youtube.com/watch?v=RYID71hYHzg'),
-  (4, 'https://www.youtube.com/watch?v=yiyjRA7X2hg'),
-  (3, 'https://www.youtube.com/watch?v=nrXlY6gzTTM');
+  (4, 'https://www.youtube.com/embed/RYID71hYHzg'),
+  (4, 'https://www.youtube.com/embed/yiyjRA7X2hg'),
+  (3, 'https://www.youtube.com/embed/nrXlY6gzTTM');
