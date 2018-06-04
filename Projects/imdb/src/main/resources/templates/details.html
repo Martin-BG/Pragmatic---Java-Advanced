@@ -31,35 +31,36 @@
     </nav>
     <h1 id="page-heading"><span th:text="#{page.details}"/></h1>
 </header>
-<section>
-    <h1 th:text="${movie.title} + ' ' + (${movie.year})" align="center"></h1>
+<section style="display: flex">
+    <!--TODO - export styling to a CSS file-->
+    <aside style="float: left; width:25%; margin: 0; padding: 2%; text-align: center">
+        <h3>Posters</h3>
+        <div th:each="url: ${movie.posters}">
+            <img th:src="@{${url}}" style="width: 100%; height: auto"/>
+        </div>
+    </aside>
 
-    <div th:each="url: ${movie.posters}">
-        <img th:src="@{${url}}" width="auto" height="400px"/>
-    </div>
-
-    <h3 th:text="Rating + ${movie.rating}"></h3>
-    <h4 th:text="${movie.votes}"></h4>
-    <h4 th:text="${movie.owner}"></h4>
-    <div th:each="genre : ${movie.genres}">
-        <h4 th:text="${genre}"/>
-    </div>
-    <div th:each="actor : ${movie.actors}">
-        <h4 th:text="${actor}"/>
-    </div>
-    <!--TODO - embed trailer player -->
-    <!--
-        <body>
-        <video width="300" height="250" controls>
-            <source src="movie2.mp4" type="video/mp4">
-            <source src="movie2.ogg" type="video/ogg">
-            Your Browser does not support video.
-        </video>
-        </body>-->
-
-    <div th:each="url, iterStat : ${movie.trailers}">
-        <a th:href="${url}" th:text="Trailer + ' ' + ${iterStat.count}" target="_blank"/>
-    </div>
+    <article style="width:35%; margin: 0; padding: 2%;">
+        <h2 th:text="${movie.title}" align="center"></h2>
+        <h2 align="center"><a th:href="@{/search(param=year,value=${movie.year})}" th:text="${movie.year}"/></h2>
+        <h3 th:text="Rating + ${movie.rating}"></h3>
+        <h4 th:text="${movie.votes}"></h4>
+        <h4><a th:href="@{/search(param=owner,value=${movie.owner})}" th:text="${movie.owner}"/></h4>
+        <h3 th:text="Genres"></h3>
+        <div th:each="genre : ${movie.genres}">
+            <h4><a th:href="@{/search(param=genre,value=${genre})}" th:text="${genre}"/></h4>
+        </div>
+        <h3 th:text="Actors"></h3>
+        <div th:each="actor : ${movie.actors}">
+            <h4><a th:href="@{/search(param=actor,value=${actor})}" th:text="${actor}"/></h4>
+        </div>
+    </article>
+    <aside style="float: right; width:40%; margin: 0; padding: 2%; text-align: center">
+        <h3>Trailers</h3>
+        <div th:each="url, iterStat : ${movie.trailers}">
+            <iframe th:src="${url}" style=" width: 560px; height: 300px;"></iframe>
+        </div>
+    </aside>
 </section>
 <section>
     <p id="message" th:text="${message}"/>
