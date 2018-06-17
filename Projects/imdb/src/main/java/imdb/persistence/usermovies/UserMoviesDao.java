@@ -1,4 +1,4 @@
-package imdb.persistence.user_movies;
+package imdb.persistence.usermovies;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
