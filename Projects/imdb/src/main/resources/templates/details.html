@@ -19,19 +19,22 @@
         <ul th:if="${username != null}">
             <li><a href="/index"><span th:text="#{navigation.home}"/></a></li>
             <li><a href="/search"><span th:text="#{navigation.search}"/></a></li>
+            <li><a th:href="@{/search(param=top,value=10)}" th:text="#{navigation.toprated}"/></li>
+            <li><a th:href="@{/search(param=owner,value=${username})}" th:text="#{navigation.mymovies}"/></li>
             <li><a href="/add"><span th:text="#{navigation.add}"/></a></li>
             <li><a href="/logout"><span th:text="#{navigation.logout}"/></a></li>
         </ul>
         <ul th:if="${username == null}">
             <li><a href="/index"><span th:text="#{navigation.index}"/></a></li>
             <li><a href="/search"><span th:text="#{navigation.search}"/></a></li>
+            <li><a th:href="@{/search(param=top,value=10)}" th:text="#{navigation.toprated}"/></li>
             <li><a href="/register"><span th:text="#{navigation.register}"/></a></li>
             <li><a href="/login"><span th:text="#{navigation.login}"/></a></li>
         </ul>
     </nav>
     <h1 id="page-heading"><span th:text="#{page.details}"/></h1>
 </header>
-<section style="display: flex">
+<main style="display: flex">
     <!--TODO - export styling to a CSS file-->
     <aside style="float: left; width:25%; margin: 0; padding: 2%; text-align: center">
         <h3>Posters</h3>
@@ -61,10 +64,8 @@
             <iframe th:src="${url}" style=" width: 560px; height: 300px;"></iframe>
         </div>
     </aside>
-</section>
-<section>
     <p id="message" th:text="${message}"/>
-</section>
+</main>
 <!--TODO - fix page layout and re-enable footer-->
 <!--<footer>
     <p><span th:text="#{footer.text}"/></p>

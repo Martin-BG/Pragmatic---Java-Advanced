@@ -41,9 +41,10 @@ span#username {
     color: #fff;
 }
 
-section {
-    margin-left: 20px;
-    align-content: center;
+main {
+    text-align: center;
+    width: 98%;
+    padding: 0 1%;
 }
 
 footer {
@@ -65,13 +66,13 @@ footer {
 #message {
     text-align: center;
     font-size: 24px;
-    color: #9b1616;
+    color: #0069ed;
     position: fixed;
     bottom: 40px;
     width: 100%;
 }
 
-.user-form {
+form {
     text-align: center;
     padding-top: 30px;
     margin: 10px;
@@ -85,18 +86,21 @@ label {
     min-width: 10em;
 }
 
-input {
+input, select, .select {
     display: inline-block;
     text-align: left;
     font-size: 20px;
     width: 20%;
     min-width: 20em;
     margin: 8px;
+    padding: 1px;
+    border: 2px;
 }
 
 button {
     display: inline-block;
     border: none;
+    outline: none;
     padding: 1rem 2rem;
     margin: 24px;
     text-decoration: none;
