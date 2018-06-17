@@ -167,6 +167,8 @@ public class MovieService {
             filter.append("AND u.email LIKE ? ");
             isLikeTypeSearch = true;
             break;
+        case "top":
+            return this.getTopRated(Integer.parseInt(value), 0.0d);
         default:    // Invalid search criteria
             return new ArrayList<>();
         }
