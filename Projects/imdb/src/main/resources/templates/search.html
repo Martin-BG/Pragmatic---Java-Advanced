@@ -11,45 +11,45 @@
         <span th:if="${username != null}" id="username" th:text="#{user.logged} + ${username}"/>
         <ul th:if="${username != null}">
             <li><a href="/index"><span th:text="#{navigation.home}"/></a></li>
+            <li><a th:href="@{/search(param=top,value=10)}" th:text="#{navigation.toprated}"/></li>
+            <li><a th:href="@{/search(param=owner,value=${username})}" th:text="#{navigation.mymovies}"/></li>
             <li><a href="/add"><span th:text="#{navigation.add}"/></a></li>
             <li><a href="/logout"><span th:text="#{navigation.logout}"/></a></li>
         </ul>
         <ul th:if="${username == null}">
             <li><a href="/index"><span th:text="#{navigation.index}"/></a></li>
+            <li><a th:href="@{/search(param=top,value=10)}" th:text="#{navigation.toprated}"/></li>
             <li><a href="/register"><span th:text="#{navigation.register}"/></a></li>
             <li><a href="/login"><span th:text="#{navigation.login}"/></a></li>
         </ul>
     </nav>
     <h1 id="page-heading"><span th:text="#{page.search}"/></h1>
 </header>
-<section>
-    <div class="user-form">
-        <form method="post">
-            <!--TODO drop-down list with valid search parameters-->
-            <label for="param" th:text="#{search.parameter}"/>
-            <input type="text"
-                   id="param"
-                   name="param"
-                   autocomplete="on"
-                   required>
-            <br>
+<main>
+    <form method="post">
+        <label for="param" th:text="#{search.parameter}"/>
+        <select id="param" name="param" class="select">
+            <option value="title"><span th:text="#{search.parameter.title}"/></option>
+            <option value="genre"><span th:text="#{search.parameter.genre}"/></option>
+            <option value="actor"><span th:text="#{search.parameter.actor}"/></option>
+            <option value="year"><span th:text="#{search.parameter.year}"/></option>
+            <option value="owner"><span th:text="#{search.parameter.owner}"/></option>
+        </select>
+        <br>
 
-            <label for="value" th:text="#{search.value}"/>
-            <input type="text"
-                   id="value"
-                   name="value"
-                   autocomplete="on"
-                   required>
-            <br>
+        <label for="value" th:text="#{search.value}"/>
+        <input type="text"
+               id="value"
+               name="value"
+               autocomplete="on"
+               required>
+        <br>
 
-            <button type="submit" th:text="#{button.search}"/>
-            <br>
-        </form>
-    </div>
-</section>
-<section>
+        <button type="submit" th:text="#{button.search}"/>
+        <br>
+    </form>
     <p id="message" th:text="${message}"/>
-</section>
+</main>
 <footer>
     <p><span th:text="#{footer.text}"/></p>
 </footer>
