@@ -7,7 +7,8 @@ USE `imdb`;
 CREATE TABLE `movies` (
   `id`    INT PRIMARY KEY AUTO_INCREMENT,
   `title` VARCHAR(50)     NOT NULL UNIQUE,
-  `year`  INT(4) UNSIGNED NOT NULL
+  `year`  INT(4) UNSIGNED NOT NULL,
+  CONSTRAINT UNIQUE `u_movies`(`title`, `year`)
 );
 
 CREATE TABLE `trailers` (
