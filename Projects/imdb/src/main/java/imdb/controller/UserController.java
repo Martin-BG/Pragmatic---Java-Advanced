@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 
 @Controller
@@ -91,7 +91,7 @@ public final class UserController {
                 request.getAttribute("org.springframework.web.servlet.DispatcherServlet.INPUT_FLASH_MAP");
         // Add current user's or top rated movies if "movies" attribute is not present in request
         if (attribute == null || !attribute.containsKey("movies")) {
-            final List<Movie> movies = this.loggedUser.isNotLogged() ?
+            final Collection<Movie> movies = this.loggedUser.isNotLogged() ?
                     this.movieService.getTopRated(10, 0.0d) :
                     this.movieService.findByCriteria("owner", this.loggedUser.getLoggedUserIdentity());
             view.getModel().put("movies", movies);

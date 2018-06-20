@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.util.List;
+import java.util.Collection;
 
 @Repository
 class UserMoviesDao extends NamedParameterJdbcTemplate {
@@ -40,7 +40,7 @@ class UserMoviesDao extends NamedParameterJdbcTemplate {
         }
     }
 
-    final List<String> getAllForUser(final String email) {
+    final Collection<String> getAllForUser(final String email) {
         final String sql = "SELECT m.title FROM `users_movies` AS um " +
                 "LEFT JOIN `movies` AS m ON um.movie_id = m.id " +
                 "LEFT JOIN `users` AS u ON um.user_id = u.id " +

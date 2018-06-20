@@ -3,7 +3,7 @@ package imdb.persistence.rating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Collection;
 
 @Service
 public final class RatingService {
@@ -31,11 +31,11 @@ public final class RatingService {
         return this.ratingDao.get(movieTitle, userEmail);
     }
 
-    public List<String> getUserRatings(final String userEmail) {
+    public Collection<String> getUserRatings(final String userEmail) {
         return this.ratingDao.getAllForUser(userEmail);
     }
 
-    public List<Integer> getMovieRatings(final String movieTitle) {
+    public Collection<Integer> getMovieRatings(final String movieTitle) {
         return this.ratingDao.getAllForMovie(movieTitle);
     }
 }

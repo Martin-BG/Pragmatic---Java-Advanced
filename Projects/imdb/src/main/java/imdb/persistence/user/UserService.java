@@ -6,7 +6,7 @@ import imdb.persistence.usermovies.UserMoviesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Collection;
 
 @Service
 final public class UserService {
@@ -36,11 +36,11 @@ final public class UserService {
         return this.ratingService.get(title, email);
     }
 
-    public List<String> getUserRatings(final String email) {
+    public Collection<String> getUserRatings(final String email) {
         return this.ratingService.getUserRatings(email);
     }
 
-    public List<String> getUserTitles(final String email) {
+    public Collection<String> getUserTitles(final String email) {
         return this.userMoviesService.getUserTitles(email);
     }
 

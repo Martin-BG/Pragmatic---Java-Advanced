@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.util.List;
+import java.util.Collection;
 
 @Repository
 class RatingDao extends NamedParameterJdbcTemplate {
@@ -62,7 +62,7 @@ class RatingDao extends NamedParameterJdbcTemplate {
         }
     }
 
-    final List<String> getAllForUser(final String email) {
+    final Collection<String> getAllForUser(final String email) {
         final String sql = "SELECT m.title FROM `movies_user_ratings` AS mur " +
                 "LEFT JOIN `movies` AS m ON mur.movie_id = m.id " +
                 "LEFT JOIN `users` AS u ON mur.user_id = u.id " +
@@ -70,7 +70,7 @@ class RatingDao extends NamedParameterJdbcTemplate {
         return getJdbcOperations().queryForList(sql, new Object[]{email}, String.class);
     }
 
-    final List<Integer> getAllForMovie(final String title) {
+    final Collection<Integer> getAllForMovie(final String title) {
         final String sql = "SELECT mur.rating FROM `movies_user_ratings` AS mur " +
                 "LEFT JOIN `movies` AS m ON mur.movie_id = m.id " +
                 "LEFT JOIN `users` AS u ON mur.user_id = u.id " +

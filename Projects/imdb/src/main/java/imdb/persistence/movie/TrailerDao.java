@@ -6,8 +6,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
 
 @Repository
 class TrailerDao extends NamedParameterJdbcTemplate {
@@ -27,9 +26,9 @@ class TrailerDao extends NamedParameterJdbcTemplate {
         }
     }
 
-    final Set<String> getTrailersForMovie(final String title) {
+    final Collection<String> getTrailersForMovie(final String title) {
         final String sql = "SELECT t.url FROM `trailers` AS t " +
                 "WHERE t.movie_id = (SELECT m.id FROM `movies` AS m WHERE m.title = ?)";
-        return new HashSet<>(getJdbcOperations().queryForList(sql, new Object[]{title}, String.class));
+        return getJdbcOperations().queryForList(sql, new Object[]{title}, String.class);
     }
 }

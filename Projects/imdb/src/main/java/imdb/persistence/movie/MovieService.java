@@ -8,9 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -94,7 +93,7 @@ public final class MovieService {
     }
 
     private void initRating(final Movie movie) {
-        final List<Integer> ratings = this.ratingService.getMovieRatings(movie.getTitle());
+        final Collection<Integer> ratings = this.ratingService.getMovieRatings(movie.getTitle());
         movie.setVotes(ratings.size());
         movie.setRating((double) ratings.stream().mapToInt(x -> x).sum() / ratings.size());
     }
@@ -105,28 +104,28 @@ public final class MovieService {
             return null;
         }
 
-        movie.setTrailers(new HashSet<>(this.trailerDao.getTrailersForMovie(title)));
-        movie.setPosters(new HashSet<>(this.posterDao.getPostersForMovie(title)));
-        movie.setActors(new HashSet<>(this.movieActorsDao.getActorsForMovie(title)));
-        movie.setGenres(new HashSet<>(this.movieGenresDao.getGenresForMovie(title)));
+        movie.setTrailers(this.trailerDao.getTrailersForMovie(title));
+        movie.setPosters(this.posterDao.getPostersForMovie(title));
+        movie.setActors(this.movieActorsDao.getActorsForMovie(title));
+        movie.setGenres(this.movieGenresDao.getGenresForMovie(title));
         initRating(movie);
         initOwner(movie);
 
         return movie;
     }
 
-    public List<String> getAllTitles() {
+    public Collection<String> getAllTitles() {
         return this.movieDao.getAllTitles();
     }
 
-    public List<Movie> getAllMovies() {
+    public Collection<Movie> getAllMovies() {
         return this.getAllTitles()
                 .stream()
                 .map(this::findByTitle)
                 .collect(Collectors.toList());
     }
 
-    public List<Movie> getTopRated(final long count, final Double minRate) {
+    public Collection<Movie> getTopRated(final long count, final Double minRate) {
         return this.getAllTitles()
                 .stream()
                 .map(this::findByTitle)
@@ -136,7 +135,7 @@ public final class MovieService {
                 .collect(Collectors.toList());
     }
 
-    public List<Movie> findByCriteria(final String param, final String value) {
+    public Collection<Movie> findByCriteria(final String param, final String value) {
         final StringBuilder query = new StringBuilder("SELECT m.title FROM `movies` AS m ");
         final StringBuilder filter = new StringBuilder("WHERE 1 = 1 ");
         boolean isLikeTypeSearch = false;

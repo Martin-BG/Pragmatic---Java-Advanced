@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.util.List;
+import java.util.Collection;
 
 @Repository
 class MovieDao extends NamedParameterJdbcTemplate {
@@ -36,12 +36,12 @@ class MovieDao extends NamedParameterJdbcTemplate {
         }
     }
 
-    final List<String> getAllTitles() {
+    final Collection<String> getAllTitles() {
         final String sql = "SELECT m.title FROM `movies` AS m";
         return getJdbcOperations().queryForList(sql, String.class);
     }
 
-    final List<String> findByCriteria(final String sql, final String criteria) {
+    final Collection<String> findByCriteria(final String sql, final String criteria) {
         return getJdbcOperations().queryForList(sql, new Object[]{criteria}, String.class);
     }
 }

@@ -3,7 +3,7 @@ package imdb.persistence.usermovies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Collection;
 
 @Service
 public final class UserMoviesService {
@@ -19,7 +19,7 @@ public final class UserMoviesService {
         return this.userMoviesDao.add(movieTitle, userEmail);
     }
 
-    public List<String> getUserTitles(final String userEmail) {
+    public Collection<String> getUserTitles(final String userEmail) {
         return this.userMoviesDao.getAllForUser(userEmail);
     }
 

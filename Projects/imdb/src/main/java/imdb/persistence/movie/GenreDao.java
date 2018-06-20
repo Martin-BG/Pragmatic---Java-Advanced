@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.util.List;
+import java.util.Collection;
 
 @Repository
 class GenreDao extends NamedParameterJdbcTemplate {
@@ -30,7 +30,7 @@ class GenreDao extends NamedParameterJdbcTemplate {
         return genre.equals(getJdbcOperations().queryForObject(sql, new Object[]{genre}, String.class));
     }
 
-    final List<String> getAllGenres() {
+    final Collection<String> getAllGenres() {
         final String sql = "SELECT g.name FROM `genres` AS g";
         return getJdbcOperations().queryForList(sql, String.class);
     }

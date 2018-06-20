@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
+import java.util.Collection;
 
 @Controller
 public final class MovieController {
@@ -96,7 +96,7 @@ public final class MovieController {
         if (param.isEmpty()) {
             view.setViewName("/search");
         } else {
-            final List<Movie> movies = this.movieService.findByCriteria(param, value);
+            final Collection<Movie> movies = this.movieService.findByCriteria(param, value);
             redirectAttributes.addFlashAttribute("movies", movies);
             redirectAttributes.addFlashAttribute("message",
                     this.messages.get("movie.search-result") + movies.size());
