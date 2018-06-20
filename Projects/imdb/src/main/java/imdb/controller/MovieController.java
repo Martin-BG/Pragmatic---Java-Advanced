@@ -45,9 +45,15 @@ public final class MovieController {
             view.getModel().put("message", this.messages.get("movie.add-fail") + title);
             view.setViewName("/add");
         } else {
-            redirectAttributes.addFlashAttribute("movie", this.movieService.findByTitle(title));
-            redirectAttributes.addFlashAttribute("message", this.messages.get("movie.add-success"));
-            view.setViewName("redirect:/edit");
+            final Movie movie = this.movieService.findByTitle(title);
+            if (movie != null) {
+                redirectAttributes.addFlashAttribute("movie", movie);
+                redirectAttributes.addFlashAttribute("message", this.messages.get("movie.add-success"));
+                view.setViewName("redirect:/edit");
+            } else {
+                view.getModel().put("message", this.messages.get("movie.add-fail") + title);
+                view.setViewName("/add");
+            }
         }
 
         if (!this.loggedUser.isNotLogged()) {
