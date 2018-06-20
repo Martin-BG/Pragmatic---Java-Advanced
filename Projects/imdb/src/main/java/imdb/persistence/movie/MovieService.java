@@ -100,7 +100,7 @@ public final class MovieService {
     }
 
     public Movie findByTitle(final String title) {
-        Movie movie = this.movieDao.findByTitle(title);
+        final Movie movie = this.movieDao.findByTitle(title);
         if (movie == null) {
             return null;
         }
