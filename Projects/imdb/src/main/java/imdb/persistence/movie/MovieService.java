@@ -130,7 +130,7 @@ public final class MovieService {
         return this.getAllTitles()
                 .stream()
                 .map(this::findByTitle)
-                .filter(m -> !Double.isNaN(m.getRating()) && Double.compare(minRate, m.getRating()) <= 0)
+                .filter(m -> m != null && !Double.isNaN(m.getRating()) && Double.compare(minRate, m.getRating()) <= 0)
                 .sorted(Comparator.comparingDouble(Movie::getRating).reversed())
                 .limit(count)
                 .collect(Collectors.toList());
