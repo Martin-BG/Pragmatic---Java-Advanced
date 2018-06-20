@@ -1,11 +1,13 @@
 package imdb.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Data
+@EqualsAndHashCode(of = {"title", "year"})
 public final class Movie {
 
     private final String title;
