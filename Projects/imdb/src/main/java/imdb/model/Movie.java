@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-public class Movie {
+public final class Movie {
 
     private final String title;
     private final Integer year;
