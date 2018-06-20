@@ -18,8 +18,8 @@ class MovieDao extends NamedParameterJdbcTemplate {
         super(sqlDataSource);
     }
 
-    boolean add(final Movie movie) {
-        String sql = "INSERT INTO `movies` (`title`, `year`) VALUES (?, ?)";
+    final boolean add(final Movie movie) {
+        final String sql = "INSERT INTO `movies` (`title`, `year`) VALUES (?, ?)";
         try {
             return 1 == getJdbcOperations().update(sql, movie.getTitle(), movie.getYear());
         } catch (DataAccessException e) {
@@ -27,7 +27,7 @@ class MovieDao extends NamedParameterJdbcTemplate {
         }
     }
 
-    Movie findByTitle(final String title) {
+    final Movie findByTitle(final String title) {
         final String sql = "SELECT * FROM `movies` WHERE `title` = ?";
         try {
             return getJdbcOperations().queryForObject(sql, new Object[]{title}, new MovieRowMapper());
@@ -36,12 +36,12 @@ class MovieDao extends NamedParameterJdbcTemplate {
         }
     }
 
-    List<String> getAllTitles() {
+    final List<String> getAllTitles() {
         final String sql = "SELECT m.title FROM `movies` AS m";
         return getJdbcOperations().queryForList(sql, String.class);
     }
 
-    List<String> findByCriteria(final String sql, final String criteria) {
+    final List<String> findByCriteria(final String sql, final String criteria) {
         return getJdbcOperations().queryForList(sql, new Object[]{criteria}, String.class);
     }
 }

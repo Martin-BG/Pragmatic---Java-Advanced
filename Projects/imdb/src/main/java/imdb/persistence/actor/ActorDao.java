@@ -15,8 +15,8 @@ class ActorDao extends NamedParameterJdbcTemplate {
         super(sqlDataSource);
     }
 
-    boolean add(final String actor) {
-        String sql = "INSERT INTO `actors` (`name`) VALUES (?)";
+    final boolean add(final String actor) {
+        final String sql = "INSERT INTO `actors` (`name`) VALUES (?)";
         try {
             return 1 == getJdbcOperations().update(sql, actor);
         } catch (DataAccessException e) {

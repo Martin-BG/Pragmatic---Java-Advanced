@@ -17,7 +17,7 @@ class UserDao extends NamedParameterJdbcTemplate {
         super(sqlDataSource);
     }
 
-    boolean add(final String email, final String password) {
+    final boolean add(final String email, final String password) {
         final String sql = "INSERT INTO `users` (`email`, `password`) VALUES (?, ?)";
         try {
             return 1 == getJdbcOperations().update(sql, email, password);
@@ -26,7 +26,7 @@ class UserDao extends NamedParameterJdbcTemplate {
         }
     }
 
-    User get(final String email) {
+    final User get(final String email) {
         final String sql = "SELECT * FROM `users` WHERE `email` = ?";
         try {
             return getJdbcOperations().queryForObject(sql, new Object[]{email}, new UserRowMapper());

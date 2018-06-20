@@ -17,7 +17,7 @@ class RatingDao extends NamedParameterJdbcTemplate {
         super(sqlDataSource);
     }
 
-    boolean add(final String movieTitle, final String userEmail, final int rating) {
+    final boolean add(final String movieTitle, final String userEmail, final int rating) {
         final String sql = "INSERT INTO `movies_user_ratings` (`movie_id`, `user_id`, `rating`) " +
                 "VALUES ((SELECT m.id FROM `movies` AS m WHERE m.title = ?), " +
                 "(SELECT u.id FROM `users` AS u WHERE u.email = ?), ?)";
@@ -28,7 +28,7 @@ class RatingDao extends NamedParameterJdbcTemplate {
         }
     }
 
-    boolean update(final String movieTitle, final String userEmail, final int rating) {
+    final boolean update(final String movieTitle, final String userEmail, final int rating) {
         final String sql = "UPDATE `movies_user_ratings` AS mur SET mur.rating = ? WHERE " +
                 "`movie_id` = (SELECT m.id FROM `movies` AS m WHERE m.title = ?) AND " +
                 "`user_id` = (SELECT u.id FROM `users` AS u WHERE u.email = ?)";
@@ -39,7 +39,7 @@ class RatingDao extends NamedParameterJdbcTemplate {
         }
     }
 
-    boolean delete(final String movieTitle, final String userEmail) {
+    final boolean delete(final String movieTitle, final String userEmail) {
         final String sql = "DELETE FROM `movies_user_ratings` WHERE " +
                 "`movie_id` = (SELECT m.id FROM `movies` AS m WHERE m.title = ?) AND " +
                 "`user_id` = (SELECT u.id FROM `users` AS u WHERE u.email = ?);";
@@ -50,7 +50,7 @@ class RatingDao extends NamedParameterJdbcTemplate {
         }
     }
 
-    Integer get(final String title, final String email) {
+    final Integer get(final String title, final String email) {
         final String sql = "SELECT mur.rating FROM `movies_user_ratings` AS mur " +
                 "LEFT JOIN `movies` AS m ON mur.movie_id = m.id " +
                 "LEFT JOIN `users` AS u ON mur.user_id = u.id " +
@@ -62,7 +62,7 @@ class RatingDao extends NamedParameterJdbcTemplate {
         }
     }
 
-    List<String> getAllForUser(final String email) {
+    final List<String> getAllForUser(final String email) {
         final String sql = "SELECT m.title FROM `movies_user_ratings` AS mur " +
                 "LEFT JOIN `movies` AS m ON mur.movie_id = m.id " +
                 "LEFT JOIN `users` AS u ON mur.user_id = u.id " +
@@ -70,7 +70,7 @@ class RatingDao extends NamedParameterJdbcTemplate {
         return getJdbcOperations().queryForList(sql, new Object[]{email}, String.class);
     }
 
-    List<Integer> getAllForMovie(final String title) {
+    final List<Integer> getAllForMovie(final String title) {
         final String sql = "SELECT mur.rating FROM `movies_user_ratings` AS mur " +
                 "LEFT JOIN `movies` AS m ON mur.movie_id = m.id " +
                 "LEFT JOIN `users` AS u ON mur.user_id = u.id " +

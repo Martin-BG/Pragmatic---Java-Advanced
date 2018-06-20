@@ -17,8 +17,8 @@ class PosterDao extends NamedParameterJdbcTemplate {
         super(sqlDataSource);
     }
 
-    boolean add(final String title, final String url) {
-        String sql = "INSERT INTO `posters` (`movie_id`, `url`) VALUES (" +
+    final boolean add(final String title, final String url) {
+        final String sql = "INSERT INTO `posters` (`movie_id`, `url`) VALUES (" +
                 "(SELECT m.id FROM `movies` AS m WHERE m.title = ?), ?)";
         try {
             return 1 == getJdbcOperations().update(sql, title, url);
@@ -27,7 +27,7 @@ class PosterDao extends NamedParameterJdbcTemplate {
         }
     }
 
-    Set<String> getPostersForMovie(final String title) {
+    final Set<String> getPostersForMovie(final String title) {
         final String sql = "SELECT p.url FROM `posters` AS p " +
                 "WHERE p.movie_id = (SELECT m.id FROM `movies` AS m WHERE m.title = ?)";
         return new HashSet<>(getJdbcOperations().queryForList(sql, new Object[]{title}, String.class));

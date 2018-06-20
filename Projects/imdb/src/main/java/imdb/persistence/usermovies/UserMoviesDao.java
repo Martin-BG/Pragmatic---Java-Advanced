@@ -17,7 +17,7 @@ class UserMoviesDao extends NamedParameterJdbcTemplate {
         super(sqlDataSource);
     }
 
-    boolean add(final String movieTitle, final String userEmail) {
+    final boolean add(final String movieTitle, final String userEmail) {
         final String sql = "INSERT INTO `users_movies` (`movie_id`, `user_id`) " +
                 "VALUES ((SELECT m.id FROM `movies` AS m WHERE m.title = ?), " +
                 "(SELECT u.id FROM `users` AS u WHERE u.email = ?))";
@@ -28,7 +28,7 @@ class UserMoviesDao extends NamedParameterJdbcTemplate {
         }
     }
 
-    String getOwner(final String title) {
+    final String getOwner(final String title) {
         final String sql = "SELECT u.email FROM `users_movies` AS um " +
                 "LEFT JOIN `movies` AS m ON um.movie_id = m.id " +
                 "LEFT JOIN `users` AS u ON um.user_id = u.id " +
@@ -40,7 +40,7 @@ class UserMoviesDao extends NamedParameterJdbcTemplate {
         }
     }
 
-    List<String> getAllForUser(final String email) {
+    final List<String> getAllForUser(final String email) {
         final String sql = "SELECT m.title FROM `users_movies` AS um " +
                 "LEFT JOIN `movies` AS m ON um.movie_id = m.id " +
                 "LEFT JOIN `users` AS u ON um.user_id = u.id " +

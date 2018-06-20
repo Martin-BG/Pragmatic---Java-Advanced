@@ -16,8 +16,8 @@ class GenreDao extends NamedParameterJdbcTemplate {
         super(sqlDataSource);
     }
 
-    boolean add(final String genre) {
-        String sql = "INSERT INTO `genres` (`name`) VALUES (?)";
+    final boolean add(final String genre) {
+        final String sql = "INSERT INTO `genres` (`name`) VALUES (?)";
         try {
             return 1 == getJdbcOperations().update(sql, genre);
         } catch (DataAccessException e) {
@@ -25,12 +25,12 @@ class GenreDao extends NamedParameterJdbcTemplate {
         }
     }
 
-    boolean exists(final String genre) {
-        String sql = "SELECT g.name FROM `genres` AS g WHERE g.name = ?";
+    final boolean exists(final String genre) {
+        final String sql = "SELECT g.name FROM `genres` AS g WHERE g.name = ?";
         return genre.equals(getJdbcOperations().queryForObject(sql, new Object[]{genre}, String.class));
     }
 
-    List<String> getAllGenres() {
+    final List<String> getAllGenres() {
         final String sql = "SELECT g.name FROM `genres` AS g";
         return getJdbcOperations().queryForList(sql, String.class);
     }
