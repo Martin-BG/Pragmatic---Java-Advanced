@@ -6,7 +6,7 @@ import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Messages {
+public final class Messages {
 
     private final MessageSourceAccessor accessor;
 
