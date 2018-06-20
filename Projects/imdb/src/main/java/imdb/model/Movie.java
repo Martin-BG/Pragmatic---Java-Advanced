@@ -3,7 +3,10 @@ package imdb.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 
 @Data
@@ -32,21 +35,17 @@ public final class Movie {
         this.setTrailers(null);
     }
 
-    private Collection<String> toCollection(final Collection<String> entries) {
-        if (entries == null) {
-            return new LinkedHashSet<>();
-        }
-
-        return entries.stream()
+    private Collection<String> getCollection(final Collection<String> entries) {
+        return entries == null
+                ? new LinkedHashSet<>()
+                : new LinkedHashSet<>(entries
+                .stream()
                 .collect(Collectors.toMap(
                         String::toLowerCase,    // Case insensitive distinct
                         entry -> entry,
                         (e1, e2) -> e1,         // Keep first entry
                         LinkedHashMap::new))    // Preserve input order
-                .entrySet()
-                .stream()
-                .map(Map.Entry::getValue)
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+                .values());
     }
 
     public Collection<String> getGenres() {
@@ -54,7 +53,7 @@ public final class Movie {
     }
 
     public void setGenres(final Collection<String> genres) {
-        this.genres = this.toCollection(genres);
+        this.genres = this.getCollection(genres);
     }
 
     public Collection<String> getActors() {
@@ -62,7 +61,7 @@ public final class Movie {
     }
 
     public void setActors(final Collection<String> actors) {
-        this.actors = this.toCollection(actors);
+        this.actors = this.getCollection(actors);
     }
 
     public Collection<String> getPosters() {
@@ -70,7 +69,7 @@ public final class Movie {
     }
 
     public void setPosters(final Collection<String> posters) {
-        this.posters = this.toCollection(posters);
+        this.posters = this.getCollection(posters);
     }
 
     public Collection<String> getTrailers() {
@@ -78,6 +77,6 @@ public final class Movie {
     }
 
     public void setTrailers(final Collection<String> trailers) {
-        this.trailers = this.toCollection(trailers);
+        this.trailers = this.getCollection(trailers);
     }
 }
