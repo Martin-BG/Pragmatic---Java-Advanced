@@ -3,7 +3,7 @@ package imdb.controller;
 import org.springframework.stereotype.Component;
 
 @Component
-class LoggedUser {
+final class LoggedUser {
 
     private String loggedUserIdentity;
 

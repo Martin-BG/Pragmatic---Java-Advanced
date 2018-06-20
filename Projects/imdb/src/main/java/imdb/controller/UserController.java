@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class UserController {
+public final class UserController {
 
     private final UserService userService;
     private final MovieService movieService;

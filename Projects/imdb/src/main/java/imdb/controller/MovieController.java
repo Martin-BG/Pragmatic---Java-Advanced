@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-public class MovieController {
+public final class MovieController {
 
     private final MovieService movieService;
     private final LoggedUser loggedUser;
