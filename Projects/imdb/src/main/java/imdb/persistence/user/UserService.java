@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService {
+final public class UserService {
 
     private final UserDao userDao;
     private final RatingService ratingService;

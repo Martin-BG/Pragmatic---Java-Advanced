@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserMoviesService {
+public final class UserMoviesService {
 
     private final UserMoviesDao userMoviesDao;
 

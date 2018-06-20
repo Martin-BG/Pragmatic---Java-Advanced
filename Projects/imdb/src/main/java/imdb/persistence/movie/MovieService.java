@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class MovieService {
+public final class MovieService {
 
     private final MovieDao movieDao;
     private final GenreDao genreDao;
